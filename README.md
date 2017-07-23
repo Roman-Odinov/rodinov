@@ -1,2 +1,9 @@
-# rodinov
-for job4j.ru
+# project for job4j.ru
+test commit
+
+***
+### Planned goals:
+* Learn Java 
+
+
+
