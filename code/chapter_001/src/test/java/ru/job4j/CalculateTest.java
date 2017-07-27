@@ -28,7 +28,7 @@ public class CalculateTest {
 				String.format(
 					"Hello World%s",
 					System.getProperty("line.separator")
-			)
+				)
 			)
 		);
 	}
