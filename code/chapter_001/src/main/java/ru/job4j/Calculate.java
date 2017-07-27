@@ -24,7 +24,7 @@ public class Calculate {
 	*/
 	public static void main (String[] args){
 		Calculate calc = new Calculate();
-		System.out.println(calc.echo(""));	// empty string test
-		System.out.println(calc.echo("Hello, World!"));
+		//System.out.println(calc.echo(""));	// empty string test
+		System.out.println(calc.echo("Hello World"));
 	}
 }
