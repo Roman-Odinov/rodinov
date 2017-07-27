@@ -1,5 +1,5 @@
-/*
-* Package for calculate task
+/**
+* Package for calculate task.
 *
 * @author Roman Odinov (mailto:roman.odinov@ya.ru)
 * @since 0.1
