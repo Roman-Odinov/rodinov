@@ -10,11 +10,12 @@ public class Calculate {
 	* @return String value
 	*/
 	public String echo(String value) {
-		if (value != "") {
+		/*if (value equals "") {
 			value = String.format("%s", value);
 		} else {
 			value = "the string is empty!";
 		}
+		*/
 		return value;
 	}
 
