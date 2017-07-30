@@ -32,11 +32,11 @@
 
 <module name="Checker">
 
-    <!--Расширение файла должно быть java, properties, xml-->
+    <!--File extention check-->
     <property name="fileExtensions" value="java, properties, xml"/>
 
-    <!--Пакеты должны иметь JavaDoc-->
-    <module name="JavadocPackage"/>
+    <!--Missing package-info.java file-->
+    <!--<module name="JavadocPackage"/>-->
 
     <!-- Checks for Size Violations.                    -->
     <!-- See http://checkstyle.sf.net/config_sizes.html -->
@@ -67,7 +67,7 @@
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <!-- <module name="JavadocMethod"/> -->
-        <module name="JavadocType"/>
+        <!-- <module name="JavadocType"/>-->
         <!-- <module name="JavadocVariable"/> -->
         <module name="JavadocStyle"/>
 

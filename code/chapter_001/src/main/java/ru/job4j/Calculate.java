@@ -10,13 +10,12 @@ public class Calculate {
 	* @return String value
 	*/
 	public String echo(String value) {
-		/*if (value equals "") {
-			value = String.format("%s", value);
-		} else {
+		/*if (value.equals("")) {
 			value = "the string is empty!";
-		}
-		*/
-		return value;
+		} else {
+			value = String.format("%s", value);
+		}*/
+		return String.format("%s", value);
 	}
 
 	/**
@@ -25,7 +24,7 @@ public class Calculate {
 	*/
 	public static void main(String[] args) {
 		Calculate calc = new Calculate();
-		//System.out.println(calc.echo(""));	// empty string test
+		// System.out.println(calc.echo(""));	// empty string test
 		System.out.println(calc.echo("Hello World"));
 
 	}
