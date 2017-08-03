@@ -2,7 +2,7 @@ package ru.job4j.point;
 
 import org.junit.Test;
 import static org.hamcrest.number.IsCloseTo.closeTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class TriangleTest {
 	@Test
@@ -11,22 +11,27 @@ public class TriangleTest {
 		Point b = new Point(0, 2);
 		Point c = new Point(2, 0);
 		Triangle triangle = new Triangle(a, b, c);
-		// Вычисляем площадь.
 		double result = triangle.area();
-		// Задаем ожидаемый результат.
 		double expected = 2D;
-		//Проверяем результат и ожидаемое значение.
 		assertThat(result, closeTo(expected, 0.1));
-  
-		Point aa = new Point(6, 5);
-		Point bb = new Point(6, 2);
-		Point cc = new Point(2, 0);
-		Triangle triangle2 = new Triangle(aa, bb, cc);
-		// Вычисляем площадь.
-		double result2 = triangle2.area();
-		// Задаем ожидаемый результат.
-		double expected2 = 6d;
-		//Проверяем результат и ожидаемое значение.
-		assertThat(result2, closeTo(expected2, 0.1));
+
+		a = new Point(6, 5);
+		b = new Point(6, 2);
+		c = new Point(2, 0);
+		triangle = new Triangle(a, b, c);
+		result = triangle.area();
+		expected = 6d;
+		assertThat(result, closeTo(expected, 0.1));
+
+        /**
+         * треугольник построить невозможно - линии на одной прямой
+         */
+        a = new Point(1, 1);
+        b = new Point(2, 2);
+        c = new Point(3, 3);
+        triangle = new Triangle(a, b, c);
+        result = triangle.area();
+        expected = 0;
+        assertEquals(result, expected, 0);
 	}
 }
