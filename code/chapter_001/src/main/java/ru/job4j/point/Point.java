@@ -25,7 +25,7 @@ public class Point {
   }
 
   public boolean equationCorrect(int a, int b) {
-	return (getY() == a * getX() + b);
+	return (this.y == a * this.x + b);
   }
 
 
