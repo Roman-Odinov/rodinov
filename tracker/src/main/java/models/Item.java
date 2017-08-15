@@ -5,11 +5,12 @@ package models;
  * почему creationTime есть в конструкторе, а нет там других полей таких как как comments
  * почему creationTime есть в конструкторе, а не отдельным методом по аналоги с setId()
  * нет getCreationTime()
- * почему id выносится в отдельный метод, а не идет в конструктор, хотя это логично
+ * почему задание id выносится в отдельный метод setId(), а не идет в конструктор, хотя это логично
  */
 public class Item {
-    //  id  уникальный идентификатор
-    private String id;     // private: Accessible only within the declared class itself
+    // private: Accessible only within the declared class itself.
+    // Для Bug и Task id будет недоступен по наследованию
+    private String id;     // id  уникальный идентификатор
     public String name;     // имя (может быть не уникальным)
     public String description;  // Описание - сама суть заявки - текст
     public String[] comments;   // Cписок комментариев - массив
@@ -37,24 +38,24 @@ public class Item {
     }
 
     public String getName() {
-        return this.name;
+        if(this.name != null) {     // Null Pointer Exception fix (не работает, тем не менее)
+            return this.name;
+        } else {
+            return "null";
+        }
     }
 
     public String getDescription() {
         return this.description;
     }
 
+    public void setDescription(String descr) {
+        this.description = descr;
+    }
+
     public String[] getComments(){
         return this.comments;
     }
 
-    /*public long getCreationTime() {
-        return this.creationTime;
-    }
-
-    public void setCreationTime(long creationtime) {
-        this.creationTime = creationtime;
-    }
-*/
 
 }

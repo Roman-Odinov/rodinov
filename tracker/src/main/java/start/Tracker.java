@@ -7,60 +7,31 @@ import java.util.*; // Random, Arrays
  * 1. Реализовать класс Tracker. Класс трекер - это обертка над массивом;
  2. В классе должно быть поле private Item[] items = new Item[100];
  3. Данный класс используется, как хранилище для заявок;
- 4. В нем должны быть следующие методы:
- добавление заявок - public Item add(Item);
- редактирование заявок - public void update(Item);
- удаление заявок - public void delete(Item);
- получение списка всех заявок - public Item[] getAll();
- получение списка по имени - public Item[] findByName(String key);
- получение заявки по id - public Item findById(String id);
 
  5. На все методы необходимо написать тесты.
 
  В программе на данном этапе не должно быть ввода и вывода данных;
  В классе Tracker не должно быть метода public static void main(String[] args).
- В этом задании надо создать только два класса Item и Tracker.
  */
 public class Tracker {
-    // default:  available to any other class in the same package
-    // private: Accessible only within the declared class itself.   и для созданного объекта
-    private Item[] items = new Item[100];
-    private int position = 0;
+    int itemsCount = 100;
+    Item[] items = new Item[itemsCount];
+    int position = 0;   // позиция заполнения очередного элемента в массиве items. Оно же - количество заполненных элементов.
+    // private: Accessible only within the declared class itself.
     // static : All instances share the same copy of the variable.
     private static final Random RND = new Random(System.currentTimeMillis());
 
+
     /**
      * добавляет заявку, переданную в аргументах в массив заявок
-     * @param item
-     * @return
-     */
-    /*
-    Зачем он возвращает заявку пока непонятно
+     * @param Item
+     * @return Item -- зачем нужен возврат?
      */
     public Item add(Item item) {
         item.setId(generateId());   // генерим свежий id для нового элемента
-        this.items[position] = item;    // в массив добавляем
+        items[position] = item;    // в массив добавляем
         position++;
         return item;
-    }
-
-    /**
-     * редактирование заявок
-     * @param item
-     */
-    public void update(Item item) {
-        // из получаемой выжать id
-        // найти такой же id в существующем массиве
-        // этому элементу присвоить переданный item
-        // возможно проверить валидность полей
-    }
-
-    /**
-     * удаление заявок
-     * @param item
-     */
-    public void delete(Item item) {
-        // по id найти и удалить, сдвинув массив
     }
 
 
@@ -82,21 +53,68 @@ public class Tracker {
      * @return массив класса Item
      */
     public Item[] findByName(String name) {
-        return null;
+        /**
+         * всё из-за того, что выдать нужно массив из того кол-ва элементов, насколько массив заполнен
+         * но array не позволяет изменять размерность по мере заполнения
+         * задавать массив на масимум тоже не резонно...
+         * используем ArrayList
+         * ( второй вариант - обрезать массив до возврата)
+         */
+        List<Item> result = new ArrayList<>();
+        String gottenName;
+        for(int index = 0; index < position; index++ ) {
+            gottenName = items[index].getName();
+            if(gottenName != null && name.equals(gottenName)) {     // NullPointerException fix
+                result.add(items[index]);
+            }
+        }
+        // приводим к типу массив
+        Item[] array = result.toArray(new Item[result.size()]);
+        return array;
+    }
+
+
+    /**
+     * редактирование заявок
+     * обновление элемента, если
+     * (а) найден такой же id
+     * и
+     * (б) пройдена валидация обновленных полей
+     */
+    public void update(Item updatedItem) {
+        /**
+         из получаемого объекта выжать id
+         найти такой же id в существующем массиве
+         проверить валидность полей
+         этому элементу присвоить весь переданный item (все поля)
+         */
+        String updatedId = updatedItem.getId();
+        for(int index = 0; index < position; index++ ) {
+            if ((items[index].getId()).equals(updatedId)) {         // нашли оригинал заявки в базе
+                if(checkFieldsOK(updatedItem)) {                    // поля валидны
+                    items[index] = null;
+                    items[index] = updatedItem;                         // обновили заяву
+                    return;  // следующего цикла не будет - id уникален
+                } else {    // проверка полей не прошла
+                    System.out.println("The fields are incorrect or empty!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Error: The Id not found");         // нет такого id
     }
 
 
     /**
      * получение заявки по id
-     * @param id
+     * @param String
      * @return элемент класса Item
      */
     protected Item findById(String id) {                       // protected пока для тестов
-        Item result = null;       // почему так?
-//        Item result = new Item();     // так тоже работает
-        for(Item item: items) {
-            if (item.getId().equals(id)) {
-                result = item;
+        Item result = null;       // должны вернуть null если элемент не найден
+        for(int index = 0; index < position; index++ ) {
+            if (items[index].getId().equals(id)) {
+                result = items[index];
                 break;
             }
         }
@@ -104,41 +122,64 @@ public class Tracker {
     }
 
 
-
     /**
-     * создание уникального идентификатора
-     * @return String
+     * удаление заявок
+     * @param itemToDelete
      */
-    String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RND.nextInt());
+    public void delete(Item itemToDelete) {
+        /**
+         по id найти и удалить, сдвинув массив;
+         */
+        for(int index = 0; index < position; index++ ) {
+            if((items[index].getId()).equals(itemToDelete.getId())) {    // нашли оригинал заявки в базе
+                // вызвать метод сдвига
+                // сдвиг должен возвращать ТОТ ЖЕ САМЫЙ МАССИВ
+                shift(index);
+                break;
+            }
+        }
     }
 
 
 
 
+    /**
+     * создание уникального идентификатора
+     * @return String
+     */
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RND.nextInt());
+    }
 
 
-
-    /*public static void main(String[] args) {
-        Tracker tracker = new Tracker();
-        tracker.items[0] = new Item("item, ", "description, ", 1);
-        tracker.items[1] = new Task("task, ", "descr, ");
-        tracker.items[2] = new Bug();
-
-//        tracker.add(new Task("first name, ", "first descr"));
-
-
-
-        *//*for (Item item : tracker.items) {
-            if (item instanceof Task) {      // проверка на принадлежность объекта к классу
-                Task task = (Task) item;    // приведение типов: объекта item к типу Task
-                System.out.println(item.name + item.description + task.calculatePrice()); // и здесь обращение уже к task
-            } else {
-                System.out.println(item.name + item.description);
-            }
-        }*//*
+    /**
+     * проврка валидности полей объекта
+     */
+    private boolean checkFieldsOK(Item item) {
+        // проверка instanceof здесь избыточна, но пусть будет
+        if(item.getId() != "" && item.getId() instanceof String &&
+                item.getName() != "" && item.getName() instanceof String &&
+                item.getDescription() != "" && item.getDescription() instanceof String){
+            return true;
+        }
+        return false;
+    }
 
 
-    }*/
+    /**
+     * сдвигаем items начиная с позиции index влево, укорачивая на 1
+     * @param index
+     */
+    private void shift(int index) {
+        int new_arrSize = position -1;  // новый массив, соотв., будет на 1 меньше оригинального
+        Item[] arr_new = new Item[new_arrSize];
+        // заполням ДО index
+        System.arraycopy(items, 0, arr_new, 0, index );
+        // заполняем С index до конца
+        System.arraycopy(items, index+1, arr_new, index, position - index - 1);
+        // возвращаем в оригинальный массив
+        items = Arrays.copyOf(arr_new, new_arrSize);
+        position--;
+    }
 
 }
