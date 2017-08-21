@@ -129,16 +129,24 @@ public class TrackerTest {
         // список для сравнения состоит из первого и третьего элемента:
         itemsToCompareTo = new Item[]{ tracker.items[0], tracker.items[2] };
 
-        // удалим второй элемент
+        // удалим второй по счету элемент
         tracker.delete(tracker.items[1]);
 
-        assertThat(tracker.items, is(itemsToCompareTo));
+        assertThat(tracker.getAll(), is(itemsToCompareTo));
 
         // распечатаем массив
         for(int index = 0; index < tracker.position; index++) {
             System.out.println(tracker.items[index].getName() + "; " + tracker.items[index].getDescription() + "; "
                     + tracker.items[index].getId());
         }
+
+
+        /**
+         * again just in case
+         * .add()
+         */
+        tracker.add(items[0]);
+
 
     }
 
