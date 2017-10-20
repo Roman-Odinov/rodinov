@@ -5,11 +5,11 @@ import java.util.*; // Random, Arrays
 
 /**
  * class Tracker.
- * creates and manupulates array Item
+ * creates and manupulates array of Item-s
  */
 public class Tracker {
-    int itemsCount = 100;
-    Item[] items = new Item[itemsCount];
+    final int ITEMS_COUNT = 100;   // лимит количества элементов
+    Item[] items = new Item[ITEMS_COUNT];
     public int position = 0;   // позиция заполнения очередного элемента в массиве items. Оно же - количество заполненных элементов.
     private static final Random RND = new Random(System.currentTimeMillis());
 
@@ -17,12 +17,11 @@ public class Tracker {
     /**
      * добавляет заявку, переданную в аргументах в массив заявок
      * @param item
-     * @return Item -- зачем нужен возврат?
+     * @return Item -- зачем нужен возврат? --наверное, для того, чтобы можно было проверить, добавилась ли заявка
      */
     public Item add(Item item) {
         item.setId(generateId());   // генерим свежий id для нового элемента
-        items[position] = item;    // в массив добавляем
-        position++;
+        items[position++] = item;    // в массив добавляем
         return item;
     }
 
@@ -48,7 +47,7 @@ public class Tracker {
         /**
          * всё из-за того, что выдать нужно массив из того кол-ва элементов, насколько массив заполнен
          * но array не позволяет изменять размерность по мере заполнения
-         * задавать массив на масимум тоже не резонно...
+         * задавать массив на максимум тоже не резонно...
          * используем ArrayList
          * ( второй вариант - обрезать массив до возврата)
          */
@@ -145,7 +144,7 @@ public class Tracker {
 
 
     /**
-     * проврка валидности полей объекта
+     * проверка валидности полей объекта
      */
     private boolean checkFieldsOK(Item item) {
         // проверка instanceof здесь избыточна, но пусть будет
@@ -167,13 +166,13 @@ public class Tracker {
          * нельзя уменьшать размер возвратного массива, т.к. увеличить его нет возможности - не сможем добавлять элементы
          */
 //        int new_arrSize = position -1;  // новый массив, соотв., будет на 1 меньше оригинального
-        Item[] arr_new = new Item[itemsCount];
+        Item[] arr_new = new Item[ITEMS_COUNT];
         // заполням ДО index
         System.arraycopy(items, 0, arr_new, 0, index );
         // заполняем С index до конца
         System.arraycopy(items, index+1, arr_new, index, position - index - 1);
         // возвращаем в оригинальный массив
-        items = Arrays.copyOf(arr_new, itemsCount);
+        items = Arrays.copyOf(arr_new, ITEMS_COUNT);
         position--;
     }
 

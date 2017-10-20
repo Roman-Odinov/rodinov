@@ -28,20 +28,25 @@ public class StartUI {
      * принимаем все объекты , реализованные от интерфейса Input
      * а объекты могут иметь совершенно разную реализацию полей интерфейса
      */
-    private Input input;
+    private Input input_;   // Google Style Guide: Class Data Members with a trailing underscore
+    private Tracker tracker_;   // Google Style Guide: Class Data Members with a trailing underscore
 
     /**
      * Пустой конструктор для вспомогательных методов
      */
     public StartUI(){}
 
-
-    public StartUI(Input input) {
-        this.input = input;
+    /**
+     * Конструктор, применяющий класс ввода данных
+     * @param input - тип Input
+     */
+    public StartUI(Input input, Tracker tracker) {
+        this.input_ = input;
+        this.tracker_ = tracker;
     }
 
 
-    private String options = "\nPlease select:\n"
+    private String options_ = "\nPlease select:\n"
             + "0. Add new Item\n"
             + "1. Show all items\n"
             + "2. Edit item\n"
@@ -52,12 +57,16 @@ public class StartUI {
 
 
     /**
-     * Create new Tracket item
+     * Create new Tracker item
      * @param input
      * @param tracker
      */
     private void createItem(Input input, Tracker tracker) {
         String name = input.ask("Please, input task's name: ");
+        if(name.equals("")) {
+            System.out.println("* An error occurred. Empty name.");
+            return;
+        }
         String descr = input.ask("enter description: ");
         long time = System.currentTimeMillis();
         Item item = new Item(name, descr, time);
@@ -85,12 +94,17 @@ public class StartUI {
         try {
             id = Integer.parseInt(selectedItem);    // type convertion
         } catch (Exception e) {
-            System.out.println("* An error occurred");
+            System.out.println("* An error occurred. Not a number?");
+            return;
         }
         Item[] items = tracker.getAll();
         if(id != null && id >=0 && id <= items.length -1 ) {
             String nativeId = items[id].getId();
             String name = input.ask("Please, enter new task's name: ");
+            if(name.equals("")) {
+                System.out.println("* An error occurred. Empty name.");
+                return;
+            }
             String descr = input.ask("Please, enter new description for the item: ");
             long time = System.currentTimeMillis();
             Item item = new Item(name, descr, time);
@@ -109,7 +123,8 @@ public class StartUI {
         try {
             id = Integer.parseInt(selectedItem);    // type convertion
         } catch (Exception e) {
-            System.out.println("* An error occurred");
+            System.out.println("* An error occurred. Not a number?");
+            return;
         }
         Item[] items = tracker.getAll();
         if(id != null && id >=0 && id <= items.length -1 ) {
@@ -149,10 +164,10 @@ public class StartUI {
             try {
                 foundItems = new ArrayList<>(Arrays.asList(tracker.findByName(selectedItem)));
                 if(foundItems.size() != 0) {
-
                     System.out.println("List of found items:");
-                    for(int i=0; i<foundItems.size(); i++) {
-                        System.out.println(foundItems.get(i));
+                    for(Item foundItem : foundItems) {
+                        System.out.println("name=" + foundItem.getName() + "; description=" + foundItem.getDescription() + "; id="
+                                + foundItem.getId() + "; time=" + foundItem.creationTime);
                     }
                 } else {
                     System.out.println("No item with such name found!");
@@ -169,8 +184,6 @@ public class StartUI {
 
     public void init() {
 
-        Tracker tracker = new Tracker();
-
         String selected;
         boolean exitPressed = false;
         /**
@@ -179,42 +192,44 @@ public class StartUI {
          */
         while (true) {
 
-            selected = input.ask(options);
+            selected = input_.ask(options_);
 
             switch (selected) {
                 case "0":
-                    System.out.println("Add new Item selected.");
-                    this.createItem(input, tracker);
+                    System.out.println("[*] Add new Item selected.");
+                    this.createItem(input_, tracker_);
                     break;
                 case "1":
-                    System.out.println("Show all items selected");
-                    this.showAllItems(tracker);
+                    System.out.println("[*] Show all items selected");
+                    this.showAllItems(tracker_);
                     break;
                 case "2":
-                    System.out.println("Edit item selected");
-                    this.editItem(input, tracker);
+                    System.out.println("[*] Edit item selected");
+                    this.editItem(input_, tracker_);
                     break;
                 case "3":
-                    System.out.println("Delete item selected");
-                    this.deleteItem(input, tracker);
+                    System.out.println("[*] Delete item selected");
+                    this.deleteItem(input_, tracker_);
                     break;
                 case "4":
-                    System.out.println("Find item by Id selected");
-                    this.findById(input, tracker);
+                    System.out.println("[*] Find item by Id selected");
+                    this.findById(input_, tracker_);
                     break;
                 case "5":
-                    System.out.println("Find items by name selected");
-                    this.findByName(input, tracker);
+                    System.out.println("[*] Find items by name selected");
+                    this.findByName(input_, tracker_);
                     break;
                 case "6":
                     exitPressed = true;
                     break;
                 default:
                     System.out.println("incorrect input, try again");
-                    // the default case requires no break statement.
             }
 
-            if(exitPressed) break;  // exit from loop
+            if(exitPressed){
+                System.out.println("[*] Exit selected");
+                break;  // exit from loop
+            }
         }
 
 
@@ -223,11 +238,14 @@ public class StartUI {
 
 
     /**
-     * main будет. это точка входа программы.
-     * здесь не используем ничего, что может нам помешать логике тестов (!)
+     * точка входа программы.
+     * здесь не используем ничего, что может нам помешать логике тестов
      * @param args
      */
     public static void main(String[] args) {
+
+        Tracker tracker = new Tracker();
+
         /**
          приветствие должно печататься только один раз
          */
@@ -240,6 +258,7 @@ public class StartUI {
          * используем заглушку
          */
 //        Input input = new StubInput(new String[] {"created by Stub", "next elem"});
+
         /**
          * используем консольный ввод
          */
@@ -248,8 +267,9 @@ public class StartUI {
         /**
          * Start
          */
-        new StartUI(input).init();
+        new StartUI(input, tracker).init();
 
+        System.out.println("Program terminated");
 
 
     }
