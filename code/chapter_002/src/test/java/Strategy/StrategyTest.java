@@ -1,32 +1,47 @@
 package Strategy;
 
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.Assert.*;
 
+/**
+ * TEST that our virtual console gets the same String as should
+ */
 public class StrategyTest {
 
     @Test
-    public void PaintTest() {
-        Triangle triangle = new Triangle();
-        Square square = new Square();
-
+    public void TriangleTest() {
+        String triangleShape = "  *  \n * * \n*****";
 
         /**
-         * TEST that our virtual console gets the same String as should
+         * Create a stream to redirect the output to ByteArray
          */
-        Paint paint = new Paint(triangle);
-        paint.draw();
-        // triangle.pic() -- string we should get
-        // paint.getDisplayedString() -- what was displayed
-        assertEquals(triangle.pic(), paint.getDisplayedString());
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
 
-        System.out.println();   // just print a DELIMETER
+        new Paint(new Triangle()).draw();
+        assertEquals(output.toString(), triangleShape);
 
-        paint =  new Paint(square);
-        paint.draw();
-        // square.pic() -- string we should get
-        // paint.getDisplayedString() -- what was displayed
-        assertEquals(square.pic(), paint.getDisplayedString());
+
+
+    }
+
+    @Test
+    public void SquareTest() {
+        Square square = new Square();
+        String squareShape = "*****\n*   *\n*****";
+
+        /**
+         * Create a stream to redirect the output to ByteArray
+         */
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+
+        new Paint(new Square()).draw();
+        assertEquals(output.toString(), squareShape);
 
 
     }
