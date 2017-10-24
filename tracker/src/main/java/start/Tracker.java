@@ -17,7 +17,7 @@ public class Tracker {
     /**
      * добавляет заявку, переданную в аргументах в массив заявок
      * @param item
-     * @return Item -- зачем нужен возврат? --наверное, для того, чтобы можно было проверить, добавилась ли заявка
+     * @return Item -- возврат для того, чтобы можно было проверить, добавилась ли заявка
      */
     public Item add(Item item) {
         item.setId(generateId());   // генерим свежий id для нового элемента
@@ -60,8 +60,7 @@ public class Tracker {
             }
         }
         // приводим к типу массив
-        Item[] array = result.toArray(new Item[result.size()]);
-        return array;
+        return result.toArray(new Item[result.size()]);
     }
 
 
@@ -147,13 +146,9 @@ public class Tracker {
      * проверка валидности полей объекта
      */
     private boolean checkFieldsOK(Item item) {
-        // проверка instanceof здесь избыточна, но пусть будет
-        if(item.getId() != "" && item.getId() instanceof String &&
-                item.getName() != "" && item.getName() instanceof String &&
-                item.getDescription() != "" && item.getDescription() instanceof String){
-            return true;
-        }
-        return false;
+        return !Objects.equals(item.getId(), "") &&
+                !Objects.equals(item.getName(), "") &&
+                !Objects.equals(item.getDescription(), "");
     }
 
 

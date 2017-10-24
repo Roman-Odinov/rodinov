@@ -1,5 +1,9 @@
 package start;
 
+/**
+ * Реализация интерфейса ввода.
+ * Эмуляция ввода с консоли.
+ */
 public class StubInput implements Input {
     private String[] answers;
     private int position = 0;

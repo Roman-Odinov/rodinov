@@ -3,8 +3,8 @@ package start;
 import java.util.Scanner;
 
 /**
- * Принять ввод с консоли.
- *
+ * Реализация интерфейса ввода.
+ * Ввод с консоли.
  */
 public class ConsoleInput implements Input{
 
