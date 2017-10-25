@@ -1,4 +1,4 @@
-package start;
+package input;
 
 /**
  * Реализация интерфейса ввода.
@@ -15,6 +15,11 @@ public class StubInput implements Input {
     @Override
     public String ask(String question) {
         return answers[position++];
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        return -1;
     }
 
 }

@@ -45,7 +45,7 @@ public class TrackerTest {
         assertThat(foundItems, is(itemsToCompareTo));
 
         // распечатаем
-        for(Item theitem : foundItems){
+        for (Item theitem : foundItems){
             System.out.println("name: " + theitem.getName() + "; id = " + theitem.getId());
         }
         System.out.println("=============================================================");
@@ -59,11 +59,11 @@ public class TrackerTest {
 
         // возьмем первый элемент и сохраним его id
         String gottenId = tracker.items[0].getId();
-        System.out.println("gottenId "+ gottenId);
+        System.out.println("gottenId " + gottenId);
 
         // типа "модифицированная" первая заявка: изменим description
         Item newItem = new Item("1st item", "Updated description", 11011);
-        System.out.println("newItem Id: "+ newItem.getId());
+        System.out.println("newItem Id: " + newItem.getId());
         // установим ей такой же id как и у элемента, который хотим обновить
         newItem.setId(gottenId);
 
@@ -84,19 +84,19 @@ public class TrackerTest {
         tracker.update(incorrectItem);
 
         // проверим, что оригинал не изменился
-        for(int index = 0; index < tracker.position; index++) {
+        for (int index = 0; index < tracker.position; index++) {
             assertThat(incorrectID, not(tracker.items[index].getId()));
         }
 
 
         // распечатаем
         // в местном массиве ничто не должно поменяться:
-        for(Item theitem : items){
+        for (Item theitem : items) {
             System.out.println(theitem.getName() + "; " + theitem.getDescription() + "; " + theitem.getId());
         }
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         // в tracker первый элемент заменен
-        for(int index = 0; index < tracker.position; index++) {
+        for (int index = 0; index < tracker.position; index++) {
             System.out.println(tracker.items[index].getName() + "; " + tracker.items[index].getDescription() + "; "
                     + tracker.items[index].getId());
         }
@@ -108,7 +108,7 @@ public class TrackerTest {
          */
         // возьмем второй элемент: tracker.items[1]
         String obtainedId = tracker.items[1].getId();    // должен быть элемент с description == "2nd description"
-        System.out.println("obtainedId: "+ obtainedId);
+        System.out.println("obtainedId: " + obtainedId);
 
         //// ПРОВРЕРКА ПРИ ВАЛИДНОМ id
         Item itemFoundById = tracker.findById(obtainedId);   // itemFoundById - найденный элемент
@@ -135,7 +135,7 @@ public class TrackerTest {
         assertThat(tracker.getAll(), is(itemsToCompareTo));
 
         // распечатаем массив
-        for(int index = 0; index < tracker.position; index++) {
+        for (int index = 0; index < tracker.position; index++) {
             System.out.println(tracker.items[index].getName() + "; " + tracker.items[index].getDescription() + "; "
                     + tracker.items[index].getId());
         }

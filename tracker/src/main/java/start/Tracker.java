@@ -1,23 +1,25 @@
 package start;
 
 import models.*;
-import java.util.*; // Random, Arrays
+import java.util.*;
 
 /**
  * class Tracker.
  * creates and manupulates array of Item-s
  */
 public class Tracker {
+
     final int ITEMS_COUNT = 100;   // лимит количества элементов
-    Item[] items = new Item[ITEMS_COUNT];
-    public int position = 0;   // позиция заполнения очередного элемента в массиве items. Оно же - количество заполненных элементов.
     private static final Random RND = new Random(System.currentTimeMillis());
+    public int position = 0;   // позиция заполнения очередного элемента в массиве items. Оно же - количество заполненных элементов.
+
+    Item[] items = new Item[ITEMS_COUNT];
 
 
     /**
-     * добавляет заявку, переданную в аргументах в массив заявок
+     * Добавляет заявку, переданную в аргументах в массив заявок.
      * @param item
-     * @return Item -- возврат для того, чтобы можно было проверить, добавилась ли заявка
+     * @return Item -- возврат чтобы можно было проверить, добавилась ли заявка
      */
     public Item add(Item item) {
         item.setId(generateId());   // генерим свежий id для нового элемента
@@ -27,19 +29,21 @@ public class Tracker {
 
 
     /**
-     * получение списка всех заявок
-     * выдергиваем только те, что заполнены
+     * Получение списка всех заявок.
+     * Выдергиваем только те, что заполнены.
      * @return массив класса Item
      */
     public Item[] getAll() {
-        // position - счетчик --> по нему можно ориентировать размер массива
-        // в методе Arrays.copyOfRange() последний параметр - невключительный элемент
+        /**
+         * position - счетчик --> по нему можно ориентировать размер массива
+         * в методе Arrays.copyOfRange() последний параметр - невключительный элемент
+         */
         return Arrays.copyOfRange(items, 0, position);
     }
 
 
     /**
-     * получение списка по имени
+     * Получение списка по имени.
      * @param name
      * @return массив класса Item
      */
@@ -49,13 +53,13 @@ public class Tracker {
          * но array не позволяет изменять размерность по мере заполнения
          * задавать массив на максимум тоже не резонно...
          * используем ArrayList
-         * ( второй вариант - обрезать массив до возврата)
+         * ( второй вариант - обрезать массив до возврата )
          */
         List<Item> result = new ArrayList<>();
         String gottenName;
-        for(int index = 0; index < position; index++ ) {
+        for (int index = 0; index < position; index++) {
             gottenName = items[index].getName();
-            if(gottenName != null && name.equals(gottenName)) {     // NullPointerException fix
+            if (gottenName != null && name.equals(gottenName)) {     // NullPointerException fix
                 result.add(items[index]);
             }
         }
@@ -65,8 +69,8 @@ public class Tracker {
 
 
     /**
-     * редактирование заявок
-     * обновление элемента, если
+     * Редактирование заявок.
+     * Обновление элемента, если
      * (а) найден такой же id
      * и
      * (б) пройдена валидация обновленных полей
@@ -79,9 +83,9 @@ public class Tracker {
          этому элементу присвоить весь переданный item (все поля)
          */
         String updatedId = updatedItem.getId();
-        for(int index = 0; index < position; index++ ) {
+        for (int index = 0; index < position; index++) {
             if ((items[index].getId()).equals(updatedId)) {         // нашли оригинал заявки в базе
-                if(checkFieldsOK(updatedItem)) {                    // поля валидны
+                if (checkFieldsOK(updatedItem)) {                    // поля валидны
                     items[index] = null;
                     items[index] = updatedItem;                         // обновили заяву
                     return;  // следующего цикла не будет - id уникален
@@ -96,13 +100,13 @@ public class Tracker {
 
 
     /**
-     * получение заявки по id
+     * Получение заявки по id.
      * @param id
      * @return элемент класса Item
      */
-    protected Item findById(String id) {                       // protected пока для тестов
+    public Item findById(String id) {
         Item result = null;       // должны вернуть null если элемент не найден
-        for(int index = 0; index < position; index++ ) {
+        for (int index = 0; index < position; index++) {
             if (items[index].getId().equals(id)) {
                 result = items[index];
                 break;
@@ -113,17 +117,19 @@ public class Tracker {
 
 
     /**
-     * удаление заявок
+     * Удаление заявок.
      * @param itemToDelete
      */
     public void delete(Item itemToDelete) {
         /**
          по id найти и удалить, сдвинув массив;
          */
-        for(int index = 0; index < position; index++ ) {
-            if((items[index].getId()).equals(itemToDelete.getId())) {    // нашли оригинал заявки в базе
-                // вызвать метод сдвига
-                // сдвиг должен возвращать ТОТ ЖЕ САМЫЙ МАССИВ
+        for (int index = 0; index < position; index++) {
+            if ((items[index].getId()).equals(itemToDelete.getId())) {    // нашли оригинал заявки в базе
+                /**
+                 * вызвать метод сдвига
+                 * сдвиг должен возвращать ТОТ ЖЕ САМЫЙ МАССИВ
+                 */
                 shift(index);
                 break;
             }
@@ -134,7 +140,7 @@ public class Tracker {
 
 
     /**
-     * создание уникального идентификатора
+     * Создание уникального идентификатора.
      * @return String
      */
     private String generateId() {
@@ -143,29 +149,28 @@ public class Tracker {
 
 
     /**
-     * проверка валидности полей объекта
+     * Проверка валидности полей объекта.
      */
     private boolean checkFieldsOK(Item item) {
-        return !Objects.equals(item.getId(), "") &&
-                !Objects.equals(item.getName(), "") &&
-                !Objects.equals(item.getDescription(), "");
+        return !Objects.equals(item.getId(), "")
+                && !Objects.equals(item.getName(), "")
+                && !Objects.equals(item.getDescription(), "");
     }
 
 
     /**
-     * сдвигаем items начиная с позиции index влево, укорачивая на 1
+     * Сдвигаем items начиная с позиции index влево, укорачивая на 1.
      * @param index
      */
     private void shift(int index) {
         /**
          * нельзя уменьшать размер возвратного массива, т.к. увеличить его нет возможности - не сможем добавлять элементы
          */
-//        int new_arrSize = position -1;  // новый массив, соотв., будет на 1 меньше оригинального
         Item[] arr_new = new Item[ITEMS_COUNT];
         // заполням ДО index
-        System.arraycopy(items, 0, arr_new, 0, index );
+        System.arraycopy(items, 0, arr_new, 0, index);
         // заполняем С index до конца
-        System.arraycopy(items, index+1, arr_new, index, position - index - 1);
+        System.arraycopy(items, index + 1, arr_new, index, position - index - 1);
         // возвращаем в оригинальный массив
         items = Arrays.copyOf(arr_new, ITEMS_COUNT);
         position--;

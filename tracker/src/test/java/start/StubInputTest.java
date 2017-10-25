@@ -1,5 +1,6 @@
 package start;
 
+import input.StubInput;
 import models.Item;
 import org.junit.Test;
 

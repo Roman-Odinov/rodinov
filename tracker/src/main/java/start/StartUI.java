@@ -1,6 +1,10 @@
 package start;
 
 
+import helpers.Messages;
+import input.Input;
+import input.ValidateInput;
+
 /**
  * В консоли отображается приветствие и описание программы.
  * После этого пользователю отображается консольное меню: Список всех действий, которые поддерживаются в системе.
@@ -20,39 +24,39 @@ package start;
  */
 public class StartUI {
 
-    /**
-     * Принимаем все объекты, реализованные от интерфейса Input
-     */
-    private Input input_;
-    private Tracker tracker_;
+    private Input _input;
+    private Tracker _tracker;
 
     /**
-     * Пустой конструктор для вспомогательных методов
-     */
-//    public StartUI(){}
-
-    /**
-     * Конструктор, применяющий класс ввода данных
+     * Конструктор, применяющий класс ввода данных.
      * @param input - тип Input
      */
     public StartUI(Input input, Tracker tracker) {
-        this.input_ = input;
-        this.tracker_ = tracker;
+        this._input = input;
+        this._tracker = tracker;
     }
 
 
     public void init() {
-        String selected;
-        Menu menu = new Menu(input_, tracker_);
 
+        int selected;
+
+        int[] ranges = new int[] {
+                Menu._SHOW_ALL_ITEMS_INDEX,
+                Menu._CREATE_ITEM_INDEX,
+                Menu._EDIT_ITEM_INDEX,
+                Menu._DELETE_ITEM_INDEX,
+                Menu._FIND_BY_ID_INDEX,
+                Menu._FIND_BY_NAME_INDEX,
+                Menu._EXIT_INDEX };
+
+        Menu menu = new Menu(_input, _tracker);
         do {
             System.out.println("\nAvailable options:");
             menu.showActions();
-            selected = input_.ask("Please select:");
-            menu.select(selected);
-        } while (!"6".equals(selected));    // TODO: no hardcode
-
-
+            selected = _input.ask("Please select:", ranges);    // get user choise
+            menu.select(selected);                                      // invoke selected method
+        } while ((selected) != Menu._EXIT_INDEX);
     }
 
 
@@ -64,19 +68,11 @@ public class StartUI {
     public static void main(String[] args) {
 
         Tracker tracker = new Tracker();
+        Messages.greeting();
 
-        /**
-         * приветствие
-         */
-        System.out.println("Welcome! \n" +
-                "This is a Tracker program. \n" +
-                "It recievs and manipulates tasks and bugs."
-        );
+//        Input input = new ConsoleInput();
 
-        /**
-         * используем консольный ввод
-         */
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
 
         /**
          * Start

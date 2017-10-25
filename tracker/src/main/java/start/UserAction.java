@@ -1,24 +1,26 @@
 package start;
 
+import input.Input;
+
 /**
- * Интерфейс UserAction, содержащий методы, общие для всех событий
+ * Интерфейс UserAction, содержащий методы, общие для всех событий.
  */
 public interface UserAction {
     /**
-     * User action key
+     * User action key.
      * @return
      */
     int key();
 
     /**
-     * Executes actions
+     * Executes actions.
      * @param input
      * @param tracker
      */
     void execute(Input input, Tracker tracker);
 
     /**
-     * Informs the user about actions to be performed
+     * Informs the user about actions to be performed.
      * @return
      */
     String printInfo();
