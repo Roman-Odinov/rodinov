@@ -12,15 +12,14 @@ import input.ValidateInput;
  * Когда действие закончено, пользователю опять отображается меню.
  *
  * При запуске класса StartUI пользователю отображается следующее меню:
- 0. Show all items
- 1. Add new Item
- 2. Edit item
- 3. Delete item
- 4. Find item by Id
- 5. Find items by name
- 6. Exit Program
- Select:
- *
+ * 0. Show all items
+ * 1. Add new Item
+ * 2. Edit item
+ * 3. Delete item
+ * 4. Find item by Id
+ * 5. Find items by name
+ * 6. Exit Program
+ * Select:
  */
 public class StartUI {
 
@@ -29,6 +28,7 @@ public class StartUI {
 
     /**
      * Конструктор, применяющий класс ввода данных.
+     *
      * @param input - тип Input
      */
     public StartUI(Input input, Tracker tracker) {
@@ -41,28 +41,32 @@ public class StartUI {
 
         int selected;
 
-        int[] ranges = new int[] {
-                Menu._SHOW_ALL_ITEMS_INDEX,
-                Menu._CREATE_ITEM_INDEX,
-                Menu._EDIT_ITEM_INDEX,
-                Menu._DELETE_ITEM_INDEX,
-                Menu._FIND_BY_ID_INDEX,
-                Menu._FIND_BY_NAME_INDEX,
-                Menu._EXIT_INDEX };
+        // fill allowable range to select
+        int[] ranges = new int[]{
+                Menu.SHOW_ALL_ITEMS_INDEX,
+                Menu.CREATE_ITEM_INDEX,
+                Menu.EDIT_ITEM_INDEX,
+                Menu.DELETE_ITEM_INDEX,
+                Menu.FIND_BY_ID_INDEX,
+                Menu.FIND_BY_NAME_INDEX,
+                Menu.EXIT_INDEX};
 
         Menu menu = new Menu(_input, _tracker);
+
+        // show menu and get user's choise
         do {
             System.out.println("\nAvailable options:");
-            menu.showActions();
+            menu.showActions();                                         // show allowable actions
             selected = _input.ask("Please select:", ranges);    // get user choise
             menu.select(selected);                                      // invoke selected method
-        } while ((selected) != Menu._EXIT_INDEX);
+        } while ((selected) != Menu.EXIT_INDEX);
     }
 
 
     /**
      * точка входа программы.
      * здесь не используем ничего, что может нам помешать логике тестов
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -70,9 +74,9 @@ public class StartUI {
         Tracker tracker = new Tracker();
         Messages.greeting();
 
-//        Input input = new ConsoleInput();
+//        Input input = new ConsoleInput();     // простой ввод
 
-        Input input = new ValidateInput();
+        Input input = new ValidateInput();      // ввод с валидацией данных
 
         /**
          * Start

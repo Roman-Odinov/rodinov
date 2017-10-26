@@ -1,6 +1,7 @@
 package start;
 
 import models.*;
+
 import java.util.*;
 
 /**
@@ -18,6 +19,7 @@ public class Tracker {
 
     /**
      * Добавляет заявку, переданную в аргументах в массив заявок.
+     *
      * @param item
      * @return Item -- возврат чтобы можно было проверить, добавилась ли заявка
      */
@@ -31,6 +33,7 @@ public class Tracker {
     /**
      * Получение списка всех заявок.
      * Выдергиваем только те, что заполнены.
+     *
      * @return массив класса Item
      */
     public Item[] getAll() {
@@ -44,6 +47,7 @@ public class Tracker {
 
     /**
      * Получение списка по имени.
+     *
      * @param name
      * @return массив класса Item
      */
@@ -101,6 +105,7 @@ public class Tracker {
 
     /**
      * Получение заявки по id.
+     *
      * @param id
      * @return элемент класса Item
      */
@@ -118,6 +123,7 @@ public class Tracker {
 
     /**
      * Удаление заявок.
+     *
      * @param itemToDelete
      */
     public void delete(Item itemToDelete) {
@@ -137,10 +143,9 @@ public class Tracker {
     }
 
 
-
-
     /**
      * Создание уникального идентификатора.
+     *
      * @return String
      */
     private String generateId() {
@@ -160,6 +165,7 @@ public class Tracker {
 
     /**
      * Сдвигаем items начиная с позиции index влево, укорачивая на 1.
+     *
      * @param index
      */
     private void shift(int index) {

@@ -8,12 +8,14 @@ import input.Input;
 public interface UserAction {
     /**
      * User action key.
+     *
      * @return
      */
-    int key();
+//    int key();    // TODO: delete
 
     /**
      * Executes actions.
+     *
      * @param input
      * @param tracker
      */
@@ -21,6 +23,7 @@ public interface UserAction {
 
     /**
      * Informs the user about actions to be performed.
+     *
      * @return
      */
     String printInfo();

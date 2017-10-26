@@ -1,9 +1,14 @@
 package helpers;
 
 /**
- * Throw exception named 'MenuOutException' with msg.
+ * Exception 'Menu out of boudary'.
  */
 public class MenuOutException extends RuntimeException {
+
+    /**
+     * Throw exception named 'MenuOutException' with msg.
+     * @param msg
+     */
     public MenuOutException(String msg) {
         super(msg);
     }

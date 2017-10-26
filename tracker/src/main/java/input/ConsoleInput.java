@@ -19,9 +19,10 @@ public class ConsoleInput implements Input {
     }
 
     /**
-     * If answer not in allowed range - throw MenuOutException()
+     * If answer not in allowed range - throw MenuOutException().
+     *
      * @param question: String
-     * @param range: int[]
+     * @param range:    int[]
      * @return int
      */
     @Override

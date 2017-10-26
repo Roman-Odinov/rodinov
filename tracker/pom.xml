@@ -40,11 +40,11 @@
 						 <id>validate</id>
 						 <phase>validate</phase>
 						 <configuration>
-							 <configLocation>checkstyle.xml</configLocation>
+							 <configLocation>../../sun_checks.xml</configLocation>
 							 <encoding>UTF-8</encoding>
 							 <consoleOutput>true</consoleOutput>
 							 <failsOnError>true</failsOnError>
-							 <includeTestSourceDirectory>true</includeTestSourceDirectory>
+							 <includeTestSourceDirectory>false</includeTestSourceDirectory>
 						 </configuration>
 						 <goals>
 							 <goal>check</goal>

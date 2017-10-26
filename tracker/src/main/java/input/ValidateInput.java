@@ -9,6 +9,7 @@ public class ValidateInput extends ConsoleInput {
 
     /**
      * Handling Exceptions.
+     *
      * @param question
      * @param range
      * @return int
@@ -22,9 +23,9 @@ public class ValidateInput extends ConsoleInput {
                 value = super.ask(question, range);
                 invalidInput = false;
             } catch (MenuOutException moe) {            // out of boundary Exception handling
-                System.err.println("Entered number is out of range");
+                System.out.println("Entered number is out of range");
             } catch (NumberFormatException nfe) {       // not-a-digit handling
-                System.err.println("Incorrect input, try again");
+                System.out.println("Incorrect input, try again");
             }
         } while (invalidInput);
         return value;

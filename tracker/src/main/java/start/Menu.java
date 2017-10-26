@@ -7,34 +7,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Написать класс Menu который будет реализовывать меню.
- * В классе Menu реализовать внутренние классы событий.
- * При реализации событий использовать статический внутренний класс, расположенный в одном файле с Menu.
+ * Реализация меню пользователя.
+ * В классе реализованы статические внутренние классы событий.
  */
-
-
 public class Menu {
 
     // available options quantity
-    private static final int _USER_ACTIONS_COUNT = 7;
+    private static final int USER_ACTIONS_COUNT = 7;
 
     // menu indices
-    public static final int _SHOW_ALL_ITEMS_INDEX = 0;
-    public static final int _CREATE_ITEM_INDEX = 1;
-    public static final int _EDIT_ITEM_INDEX = 2;
-    public static final int _DELETE_ITEM_INDEX = 3;
-    public static final int _FIND_BY_ID_INDEX = 4;
-    public static final int _FIND_BY_NAME_INDEX = 5;
-    public static final int _EXIT_INDEX = 6;
+    public static final int SHOW_ALL_ITEMS_INDEX = 0;
+    public static final int CREATE_ITEM_INDEX = 1;
+    public static final int EDIT_ITEM_INDEX = 2;
+    public static final int DELETE_ITEM_INDEX = 3;
+    public static final int FIND_BY_ID_INDEX = 4;
+    public static final int FIND_BY_NAME_INDEX = 5;
+    public static final int EXIT_INDEX = 6;
 
-    private Input _input;
-    private Tracker _tracker;
-    private UserAction[] _actions = new UserAction[_USER_ACTIONS_COUNT];
-
+    private Input input;
+    private Tracker tracker;
+    private UserAction[] actions = new UserAction[USER_ACTIONS_COUNT];
 
     public Menu(Input input, Tracker tracker) {
-        this._input = input;
-        this._tracker = tracker;
+        this.input = input;
+        this.tracker = tracker;
         this.fillActions();
     }
 
@@ -42,28 +38,29 @@ public class Menu {
      * Fill actions array.
      */
     private void fillActions() {
-        _actions[_SHOW_ALL_ITEMS_INDEX] = new showAllItems();
-        _actions[_CREATE_ITEM_INDEX] = new createItem();
-        _actions[_EDIT_ITEM_INDEX] = new EditItem();
-        _actions[_DELETE_ITEM_INDEX] = new deleteItem();
-        _actions[_FIND_BY_ID_INDEX] = new findById();
-        _actions[_FIND_BY_NAME_INDEX] = new findByName();
-        _actions[_EXIT_INDEX] = new Exit();
+        actions[SHOW_ALL_ITEMS_INDEX] = new showAllItems(SHOW_ALL_ITEMS_INDEX, "Show all items");
+        actions[CREATE_ITEM_INDEX] = new createItem(CREATE_ITEM_INDEX, "Add new Item");
+        actions[EDIT_ITEM_INDEX] = new EditItem(EDIT_ITEM_INDEX, "Edit item");
+        actions[DELETE_ITEM_INDEX] = new deleteItem(DELETE_ITEM_INDEX, "Delete item");
+        actions[FIND_BY_ID_INDEX] = new findById(FIND_BY_ID_INDEX, "Find item by Id");
+        actions[FIND_BY_NAME_INDEX] = new findByName(FIND_BY_NAME_INDEX, "Find items by name");
+        actions[EXIT_INDEX] = new Exit(EXIT_INDEX, "Exit");
     }
 
     /**
      * Executes selected menu.
+     *
      * @param key int
      */
     public void select(int key) {
-        _actions[key].execute(_input, _tracker);
+        actions[key].execute(input, tracker);
     }
 
     /**
      * Prints all available options.
      */
     public void showActions() {
-        for (UserAction action : _actions) {
+        for (UserAction action : actions) {
             if (action != null) {
                 System.out.println(action.printInfo());
             }
@@ -71,13 +68,11 @@ public class Menu {
     }
 
 
-    private static class showAllItems implements  UserAction {
-        public int key() {
-            return Menu._SHOW_ALL_ITEMS_INDEX;
-        }
+    private static class showAllItems extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Show all items");
+        // call BaseAction Constructor
+        showAllItems(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -95,20 +90,17 @@ public class Menu {
         }
     }
 
-    private static class createItem implements  UserAction {
-        public int key() {
-            return Menu._CREATE_ITEM_INDEX;
-        }
+    private static class createItem extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Add new Item");
+        createItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
             System.out.println("[*] Add new Item selected.");
             String name = input.ask("Please, input task's name: ");
             if (name.equals("")) {
-                System.err.println("* An error occurred. Empty name.");
+                System.out.println("* An error occurred. Empty name.");
                 return;
             }
             String descr = input.ask("enter description: ");
@@ -119,13 +111,10 @@ public class Menu {
         }
     }
 
-    private static class EditItem implements UserAction {
-        public int key() {
-            return Menu._EDIT_ITEM_INDEX;
-        }
+    private static class EditItem extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Edit item");
+        EditItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -135,15 +124,15 @@ public class Menu {
             try {
                 id = Integer.parseInt(selectedItem);    // type convertion
             } catch (Exception e) {
-                System.err.println("* An error occurred. Not a number?");
+                System.out.println("* An error occurred. Not a number?");
                 return;
             }
             Item[] items = tracker.getAll();
-            if ( id >= 0 && id <= (items.length - 1) ) {
+            if (id >= 0 && id <= (items.length - 1)) {
                 String nativeId = items[id].getId();
                 String name = input.ask("Please, enter new task's name: ");
                 if (name.equals("")) {
-                    System.err.println("* An error occurred. Empty name.");
+                    System.out.println("* An error occurred. Empty name.");
                     return;
                 }
                 String descr = input.ask("Please, enter new description for the item: ");
@@ -158,13 +147,10 @@ public class Menu {
         }
     }
 
-    private static class deleteItem implements UserAction {
-        public int key() {
-            return Menu._DELETE_ITEM_INDEX;
-        }
+    private static class deleteItem extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Delete item");
+        deleteItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -174,11 +160,11 @@ public class Menu {
             try {
                 id = Integer.parseInt(selectedItem);    // type convertion
             } catch (Exception e) {
-                System.err.println("* An error occurred. Not a number?");
+                System.out.println("* An error occurred. Not a number?");
                 return;
             }
             Item[] items = tracker.getAll();
-            if ( id >= 0 && id <= (items.length - 1) ) {
+            if (id >= 0 && id <= (items.length - 1)) {
                 tracker.delete(items[id]);
                 System.out.println("Done deleting item.");
             } else {
@@ -187,13 +173,10 @@ public class Menu {
         }
     }
 
-    private static class findById implements UserAction {
-        public int key() {
-            return Menu._FIND_BY_ID_INDEX;
-        }
+    private static class findById extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Find item by Id");
+        findById(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -203,25 +186,22 @@ public class Menu {
             try {
                 foundItem = tracker.findById(selectedItem);
             } catch (Exception e) {
-                System.err.println("* An error occurred");
+                System.out.println("* An error occurred");
             }
             if (foundItem != null) {
                 System.out.println("Found item:");
                 System.out.println("name=" + foundItem.getName() + "; description=" + foundItem.getDescription() + "; id="
                         + foundItem.getId() + "; time=" + foundItem.creationTime);
             } else {
-                System.err.println("No such ID found!");
+                System.out.println("No such ID found!");
             }
         }
     }
 
-    private static class findByName implements UserAction {
-        public int key() {
-            return Menu._FIND_BY_NAME_INDEX;
-        }
+    private static class findByName extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Find items by name");
+        findByName(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -245,22 +225,19 @@ public class Menu {
                     }
 
                 } catch (Exception e) {
-                    System.err.println("* An error occurred");
+                    System.out.println("* An error occurred");
                 }
             } else {
-                System.err.println("Input error!");
+                System.out.println("Input error!");
             }
 
         }
     }
 
-    private static class Exit implements  UserAction {
-        public int key() {
-            return Menu._EXIT_INDEX;
-        }
+    private static class Exit extends BaseAction {
 
-        public String printInfo() {
-            return String.format("[%s] %s", this.key(), "Exit");
+        Exit(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {

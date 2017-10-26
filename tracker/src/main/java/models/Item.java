@@ -12,7 +12,8 @@ public class Item {
     public long creationTime;   // Дата создания
 
 
-    public Item() { }
+    public Item() {
+    }
 
     public Item(String name, String description, long creationTime) {
         this.name = name;
@@ -29,7 +30,7 @@ public class Item {
     }
 
     public String getName() {
-        if (this.name != null) { 
+        if (this.name != null) {
             return this.name;
         } else {
             return "null";
