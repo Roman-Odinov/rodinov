@@ -22,9 +22,9 @@ public interface UserAction {
     void execute(Input input, Tracker tracker);
 
     /**
-     * Informs the user about actions to be performed.
+     * Returns info about actions to be performed.
      *
-     * @return
+     * @return String
      */
     String printInfo();
 }

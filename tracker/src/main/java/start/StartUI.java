@@ -1,7 +1,6 @@
 package start;
 
 
-import helpers.Messages;
 import input.Input;
 import input.ValidateInput;
 
@@ -19,7 +18,7 @@ import input.ValidateInput;
  * 4. Find item by Id
  * 5. Find items by name
  * 6. Exit Program
- * Select:
+ * Please select:
  */
 public class StartUI {
 
@@ -64,17 +63,18 @@ public class StartUI {
 
 
     /**
-     * точка входа программы.
-     * здесь не используем ничего, что может нам помешать логике тестов
+     * Точка входа программы.
+     * Здесь не используем ничего, что может нам помешать логике тестов
      *
      * @param args
      */
     public static void main(String[] args) {
 
         Tracker tracker = new Tracker();
-        Messages.greeting();
 
-//        Input input = new ConsoleInput();     // простой ввод
+        System.out.println("Welcome! \n"
+                + "This is a Tracker program. \n"
+                + "It recievs and manipulates tasks and bugs.");
 
         Input input = new ValidateInput();      // ввод с валидацией данных
 
