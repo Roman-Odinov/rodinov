@@ -39,8 +39,7 @@ public abstract class BaseAction implements UserAction {
      * @param input
      * @param tracker
      */
-    public void execute(Input input, Tracker tracker) {
-    }
+    public abstract void execute(Input input, Tracker tracker);
 
 
-    }
+}
