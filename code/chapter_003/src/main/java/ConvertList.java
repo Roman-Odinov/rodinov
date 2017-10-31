@@ -64,14 +64,12 @@ public class ConvertList {
 
         Iterator<Integer> iter = list.iterator();
 
-        // внешний по rows:
         for (int i = 0; i < rows; i++) {
-            // внутренний по rows:
             for (int j = 0; j < rows; j++) {
                 try {
                     // если итератор в норме добавляем итератор в текущую позицию массива
                     arr[i][j] = iter.next();
-                    // если итератор не возвращает (Exception) - заполняем нулём
+                    // иначе - заполняем нулём
                 } catch (Exception e) {
                     arr[i][j] = 0;
                 }
@@ -84,6 +82,8 @@ public class ConvertList {
 
     public static void main(String[] args) {
 
+                        /* convert Array to ArrayList */
+
 //        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7}};
 //        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8}};
 //        int[][] arr = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
@@ -92,7 +92,13 @@ public class ConvertList {
         List<Integer> list = toList(arr);
         printList(list);
 
-        int[][] arr2 = toArray(list, 4);
+                        /* convert ArrayList to 2D Array */
+
+//        ArrayList<Integer> list2 = new ArrayList<>();
+        ArrayList<Integer> list2 =new ArrayList<>(
+                        Arrays.asList(1, 2, null, 3, 4)
+        );
+        int[][] arr2 = toArray(list2, 4);
         printArr(arr2);
 
     }
