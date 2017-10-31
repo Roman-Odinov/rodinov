@@ -9,17 +9,18 @@ import java.util.List;
  */
 public class ConvertList {
 
-    // print List<Integer>
-    public static void printList(List<Integer> arrList) {
+    public static String printList(List<Integer> arrList) {
+        StringBuilder sb = new StringBuilder();
         for (int l : arrList) {
-            System.out.print(l + "  ");
+            sb.append(l);
+            sb.append("  ");
         }
-        System.out.println();
+        sb.append("\n");
+        return sb.toString();
     }
 
-    // print 2D array
-    public static void printArr(int[][] arr) {
-        System.out.println(Arrays.deepToString(arr));
+    public static String printArray(int[][] arr) {
+        return Arrays.deepToString(arr);
     }
 
     /**
@@ -63,14 +64,15 @@ public class ConvertList {
         }
 
         Iterator<Integer> iter = list.iterator();
-
+        Integer in;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < rows; j++) {
-                try {
-                    // если итератор в норме добавляем итератор в текущую позицию массива
-                    arr[i][j] = iter.next();
-                    // иначе - заполняем нулём
-                } catch (Exception e) {
+                if (iter.hasNext()) {
+                    in = iter.next();
+                    if (in != null) {
+                        arr[i][j] = in;
+                    }
+                } else {
                     arr[i][j] = 0;
                 }
             }
@@ -87,19 +89,20 @@ public class ConvertList {
 //        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7}};
 //        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8}};
 //        int[][] arr = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
-        int[][] arr = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10} };
+        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10}};
 
         List<Integer> list = toList(arr);
-        printList(list);
+        System.out.println("LIST print: \n" + printList(list));
+
 
                         /* convert ArrayList to 2D Array */
 
-//        ArrayList<Integer> list2 = new ArrayList<>();
-        ArrayList<Integer> list2 =new ArrayList<>(
-                        Arrays.asList(1, 2, null, 3, 4)
+        ArrayList<Integer> list2 = new ArrayList<>(
+                Arrays.asList(null, 2, null, 3, 4, 55, 66, null)
         );
         int[][] arr2 = toArray(list2, 4);
-        printArr(arr2);
+
+        System.out.println("2D ARRAY print: \n" + printArray(arr2));
 
     }
 
