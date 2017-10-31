@@ -20,17 +20,17 @@ public class ConvertList {
     }
 
     public static String printArray(int[][] arr) {
-        return Arrays.deepToString(arr);
+        return Arrays.deepToString(arr) + "\n";
     }
 
     /**
      * в метод приходит двумерный массив целых чисел,
      * необходимо пройтись по всем элементам массива и добавить их в List<Integer>.
      *
-     * @param array
-     * @return
+     * @param array int[][]
+     * @return List<Integer>
      */
-    public static List<Integer> toList(int[][] array) {
+    public static ArrayList<Integer> toList(int[][] array) {
 
         ArrayList<Integer> arrList = new ArrayList<>();
 
@@ -50,9 +50,9 @@ public class ConvertList {
      * Например в результате конвертации List со значениями (1,2,3,4,5,6,7) с разбиением на 3 строки
      * должен получиться двумерный массив {{1, 2, 3} {4, 5, 6} {7, 0 ,0}}
      *
-     * @param list
-     * @param rows
-     * @return
+     * @param list List<Integer>
+     * @param rows int
+     * @return int[][]
      */
     public static int[][] toArray(List<Integer> list, int rows) {
 
@@ -82,6 +82,32 @@ public class ConvertList {
         return arr;
     }
 
+    /**
+     * пройтись по всем элементам всех массивов в списке list и добавить их в один List<Integer>.
+     * Массивы в списке list могут быть разного размера.
+     *
+     * Например:
+     * list.add(new int[]{1, 2})
+     * list.add(new int[]{3, 4, 5, 6})
+     * List<Integer> result = convert(list)
+     *
+     * List<Integer> result будет содержать элементы: (1, 2, 3, 4, 5, 6)
+     *
+     * @param list List<int[]>
+     * @return List<Integer>
+     */
+    public static List<Integer> convert(List<int[]> list) {
+
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int[] arr : list) {
+            for (int i : arr) {
+                arrayList.add(i);
+            }
+        }
+        return arrayList;
+    }
+
+
     public static void main(String[] args) {
 
                         /* convert Array to ArrayList */
@@ -91,7 +117,7 @@ public class ConvertList {
 //        int[][] arr = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
         int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10}};
 
-        List<Integer> list = toList(arr);
+        ArrayList<Integer> list = toList(arr);
         System.out.println("LIST print: \n" + printList(list));
 
 
@@ -101,9 +127,17 @@ public class ConvertList {
                 Arrays.asList(null, 2, null, 3, 4, 55, 66, null)
         );
         int[][] arr2 = toArray(list2, 4);
-
         System.out.println("2D ARRAY print: \n" + printArray(arr2));
 
+
+                        /* convert ArrayList<int[]> to ArrayList<Integer> */
+
+        ArrayList<int[]> list3 = new ArrayList<>();
+        list3.add(new int[]{1, 2});
+        list3.add(new int[]{});
+        list3.add(new int[]{3, 4, 5, 6});
+        list3.add(new int[]{7});
+        System.out.println("LIST print: \n" + printList(convert(list3)));
     }
 
 }
