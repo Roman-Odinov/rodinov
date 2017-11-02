@@ -1,21 +1,28 @@
 import java.util.*;
 
 /**
- * Создать класс User с полями id, name, city.
+ * Создать класс User с полями .
+ * Класс User должен реализовать интерфейс Comparable.
  */
-public class User {
+public class User implements Comparable<User> {
     private Integer id;
     private String name;
     private String city;
+    private Integer age;
 
-    public User(Integer id, String name, String city) {
+    public User(Integer id, String name, String city, int age) {
         this.id = id;
         this.name = name;
         this.city = city;
+        this.age = age;
     }
 
     public Integer getId() {
         return this.id;
+    }
+
+    public Integer getAge() {
+        return this.age;
     }
 
     @Override
@@ -24,36 +31,69 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 
-    /**
-     * Cоздать клаcc UserConvert.
-     */
-    public static class UserConvert {
-        /**
-         * написать метод public HashMap<Integer, User> process(List<User> list) {},
-         * который принимает в себя список пользователей и конвертирует его в Map
-         * с ключом Integer id и соответствующим ему User.
-         */
-        public static HashMap<Integer, User> process(List<User> list) {
-
-            HashMap<Integer, User> hashmap = new HashMap<>();
-
-            for (User user : list) {
-                Integer id = user.getId();
-                hashmap.put(id, user);
-            }
-
-            return hashmap;
-        }
+    @Override
+    public int compareTo(User u) {
+        return age.compareTo(u.getAge());
     }
 
-    // print Map
+
+    /**
+     * написать метод public HashMap<Integer, User> process(List<User> list) {},
+     * который принимает в себя список пользователей и конвертирует его в Map
+     * с ключом Integer id и соответствующим ему User.
+     */
+    public static HashMap<Integer, User> process(List<User> list) {
+
+        HashMap<Integer, User> hashmap = new HashMap<>();
+        Integer id;
+        for (User user : list) {
+            id = user.getId();
+            hashmap.put(id, user);
+        }
+
+        return hashmap;
+    }
+
+    /**
+     * Написать метод, который будет возвращать TreeSet пользователей, отсортированных по возрасту в порядке возрастания.
+     *
+     * @return
+     */
+    public static Set<User> sort(List<User> users) {
+        TreeSet<User> ts = new TreeSet<>();
+        ts.addAll(users);
+        return ts;
+    }
+
+    public static String printList(List<User> arrList) {
+        StringBuilder sb = new StringBuilder();
+        for (User l : arrList) {
+            sb.append(l);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     public static String printMap(HashMap<Integer, User> map) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry entry : map.entrySet()) {
-            sb.append("Key: " + entry.getKey() + " Value: " + entry.getValue());
+            sb.append("Key: ");
+            sb.append(entry.getKey());
+            sb.append(" Value: ");
+            sb.append(entry.getValue());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public static String printSet(Set<User> users) {
+        StringBuilder sb = new StringBuilder();
+        for (User user : users) {
+            sb.append(user);
             sb.append("\n");
         }
         return sb.toString();
@@ -62,11 +102,15 @@ public class User {
     public static void main(String[] args) {
 
         ArrayList<User> users = new ArrayList<>();
-        users.add(new User(5454, "roman", "moscow"));
-        users.add(new User(1111, "xyligan", "moscow"));
-        users.add(new User(1111, "another person with same id", "vologda"));
-        users.add(new User(3454344, "anon", "NY"));
+        users.add(new User(5454, "roman", "moscow", 37));
+        users.add(new User(1111, "person", "vologda", 0));
+        users.add(new User(1111, "xyligan", "moscow", 18));
+        users.add(new User(3454344, "anon", "NY", 35));
 
-        System.out.println(printMap(UserConvert.process(users)));
+        System.out.println("initial list:\n" + printList(users));
+
+//        printMap(process(users));
+
+        System.out.println("sorted TreeSet:\n" + printSet(sort(users)));
     }
 }
