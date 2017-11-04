@@ -4,6 +4,8 @@ package start;
 import input.Input;
 import input.ValidateInput;
 
+import java.util.ArrayList;
+
 /**
  * В консоли отображается приветствие и описание программы.
  * После этого пользователю отображается консольное меню: Список всех действий, которые поддерживаются в системе.
@@ -49,6 +51,15 @@ public class StartUI {
                 Menu.FIND_BY_ID_INDEX,
                 Menu.FIND_BY_NAME_INDEX,
                 Menu.EXIT_INDEX};
+
+//        ArrayList<Integer> ranges = new ArrayList<>();
+//        ranges.add(Menu.SHOW_ALL_ITEMS_INDEX);
+//        ranges.add(Menu.CREATE_ITEM_INDEX);
+//        ranges.add(Menu.EDIT_ITEM_INDEX);
+//        ranges.add(Menu.DELETE_ITEM_INDEX);
+//        ranges.add(Menu.FIND_BY_ID_INDEX);
+//        ranges.add(Menu.FIND_BY_NAME_INDEX);
+//        ranges.add(Menu.EXIT_INDEX);
 
         Menu menu = new Menu(_input, _tracker);
 

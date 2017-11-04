@@ -77,7 +77,7 @@ public class Menu {
 
         public void execute(Input input, Tracker tracker) {
             System.out.println("[*] Show all items selected");
-            Item[] items = tracker.getAll();
+            Item[] items = tracker.getAll();    ////todo type
             if (items.length != 0) {
                 System.out.println("List of items in Tracker:");
                 for (int index = 0; index < items.length; index++) {
@@ -127,7 +127,7 @@ public class Menu {
                 System.out.println("* An error occurred. Not a number?");
                 return;
             }
-            Item[] items = tracker.getAll();
+            Item[] items = tracker.getAll();    //todo type
             if (id >= 0 && id <= (items.length - 1)) {
                 String nativeId = items[id].getId();
                 String name = input.ask("Please, enter new task's name: ");
@@ -163,7 +163,7 @@ public class Menu {
                 System.out.println("* An error occurred. Not a number?");
                 return;
             }
-            Item[] items = tracker.getAll();
+            Item[] items = tracker.getAll();    //todo type
             if (id >= 0 && id <= (items.length - 1)) {
                 tracker.delete(items[id]);
                 System.out.println("Done deleting item.");
@@ -213,7 +213,7 @@ public class Menu {
             if (!"".equals(selectedItem)) {
                 ArrayList<Item> foundItems;
                 try {
-                    foundItems = new ArrayList<>(Arrays.asList(tracker.findByName(selectedItem)));
+                    foundItems = new ArrayList<>(Arrays.asList(tracker.findByName(selectedItem)));  //todo
                     if (foundItems.size() != 0) {
                         System.out.println("List of found items:");
                         for (Item foundItem : foundItems) {

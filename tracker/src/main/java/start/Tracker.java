@@ -14,7 +14,7 @@ public class Tracker {
     private static final Random RND = new Random(System.currentTimeMillis());
     public int position = 0;   // позиция заполнения очередного элемента в массиве items. Оно же - количество заполненных элементов.
 
-    Item[] items = new Item[ITEMS_COUNT];
+    Item[] items = new Item[ITEMS_COUNT]; //todo main array
 
 
     /**
@@ -25,7 +25,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(generateId());   // генерим свежий id для нового элемента
-        items[position++] = item;    // в массив добавляем
+        items[position++] = item;    // в массив добавляем  todo
         return item;
     }
 
@@ -36,7 +36,7 @@ public class Tracker {
      *
      * @return массив класса Item
      */
-    public Item[] getAll() {
+    public Item[] getAll() {    //todo
         /**
          * position - счетчик --> по нему можно ориентировать размер массива
          * в методе Arrays.copyOfRange() последний параметр - невключительный элемент
@@ -51,7 +51,7 @@ public class Tracker {
      * @param name
      * @return массив класса Item
      */
-    public Item[] findByName(String name) {
+    public Item[] findByName(String name) {     //todo
         /**
          * всё из-за того, что выдать нужно массив из того кол-ва элементов, насколько массив заполнен
          * но array не позволяет изменять размерность по мере заполнения
@@ -87,7 +87,7 @@ public class Tracker {
          этому элементу присвоить весь переданный item (все поля)
          */
         String updatedId = updatedItem.getId();
-        for (int index = 0; index < position; index++) {
+        for (int index = 0; index < position; index++) {    //todo
             if ((items[index].getId()).equals(updatedId)) {         // нашли оригинал заявки в базе
                 if (checkFieldsOK(updatedItem)) {                    // поля валидны
                     items[index] = null;
@@ -112,7 +112,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;       // должны вернуть null если элемент не найден
         for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
+            if (items[index].getId().equals(id)) {          //todo
                 result = items[index];
                 break;
             }
@@ -130,7 +130,7 @@ public class Tracker {
         /**
          по id найти и удалить, сдвинув массив;
          */
-        for (int index = 0; index < position; index++) {
+        for (int index = 0; index < position; index++) {    //todo
             if ((items[index].getId()).equals(itemToDelete.getId())) {    // нашли оригинал заявки в базе
                 /**
                  * вызвать метод сдвига
@@ -168,7 +168,7 @@ public class Tracker {
      *
      * @param index
      */
-    private void shift(int index) {
+    private void shift(int index) {     //todo
         /**
          * нельзя уменьшать размер возвратного массива, т.к. увеличить его нет возможности - не сможем добавлять элементы
          */
