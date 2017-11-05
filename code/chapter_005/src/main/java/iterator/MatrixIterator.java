@@ -1,3 +1,4 @@
+package iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -21,16 +22,16 @@ public class MatrixIterator implements Iterator<Integer> {
     private final int len;
     private int index = -1;
 
-    public MatrixIterator(int[][] array) {
+    public MatrixIterator(int[][] dArray) {
 
         // разложим в одномерный
         int capacity = 0;
-        for (int[] ar : array) {
+        for (int[] ar : dArray) {
             capacity += ar.length;
         }
         this.array = new int[capacity];
         int index2 = 0;
-        for (int[] ar : array) {
+        for (int[] ar : dArray) {
             for (int value : ar) {
                 this.array[index2++] = value;
             }
