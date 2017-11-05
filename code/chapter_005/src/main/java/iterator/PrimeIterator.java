@@ -1,3 +1,4 @@
+package iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -28,6 +29,7 @@ public class PrimeIterator implements Iterator {
     private final int[] array;
     private final int len;
     private int index = -1;
+    private int primeIndex;
 
     public PrimeIterator(int[] arr) {
         this.array = arr;
@@ -51,8 +53,10 @@ public class PrimeIterator implements Iterator {
             value = array[i];
             // 2 и 3 не пройдут по вложенному циклу, так что не будет установки флага true
             // (1 тоже не пройдет, но он не prime, дефолтное false )
-            if (value == 2 || value == 3)
+            if (value == 2 || value == 3) {
                 has = true;
+                primeIndex = i;
+            }
             // ПРОВЕРЯЕМ ЯВЛЯЕТСЯ ЛИ value ПРОСТЫМ ЧИСЛОМ
             double s = sqrt(value);
             for (int j = 2; j <= s; j++) {
@@ -64,11 +68,11 @@ public class PrimeIterator implements Iterator {
                 // если мы вышли сюда - это может быть как value is not prime так и value is prime
             }
             if (has) {
+                primeIndex = i;
                 return has;
             }
-            // проверяем следующий справа элемент
+            // проверяем следующий элемент
         }
-
         return has;
     }
 
@@ -80,33 +84,12 @@ public class PrimeIterator implements Iterator {
      */
     @Override
     public Integer next() throws NoSuchElementException {
-        // не выкидывать Exception пока не дойдем до конца
-        index++;
-        int value;  // то что будем возвращать
-        boolean prime = false;
 
-        for (int i = index; i < len; i++) {   // i -> тот индекс, где мы нашли prime
-            value = array[i];
-            if (value == 2 || value == 3) {  // prime
-                prime = true;
-            }
-            // ПРОВЕРЯЕМ ЯВЛЯЕТСЯ ЛИ value ПРОСТЫМ ЧИСЛОМ
-            double s = sqrt(value);
-            for (int j = 2; j <= s; j++) {
-                prime = true;
-                if (value % j == 0) {   // value is not prime
-                    prime = false;
-                    break;
-                }
-            }
-            // если мы вышли сюда - это может быть как value is not prime так и value is prime
-            if (prime) {
-                index = i;
-                return value;
-            }
-            // else: проверяем следующий справа элемент
+        if (hasNext()) {
+            index = primeIndex;
+            return array[index];
         }
-        // если мы вышли сюда - ничего не найдено
+        // ничего не найдено
         throw new NoSuchElementException();
     }
 
