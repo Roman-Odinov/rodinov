@@ -3,13 +3,15 @@ package Map;
 import java.util.*;
 
 /**
- * Перекрывать hashCode.
+ * Перекрывать equals().
  *
  * Создать два объекта User, которые имеют одинаковые поля.
  *
  * Создать карту Map<User, Object>
  *
  * Добавить два объекта с пункта 3 в карту. Вывести карту на печать. Описать полученный результат словами.
+ * При этом метод hashCode() остается не переопределенным.
+ *
  */
 public class User {
 
@@ -23,25 +25,25 @@ public class User {
         this.birthday = birthday;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        User user = (User) o;
-//
-//        if (children != user.children) return false;
-//        if (!name.equals(user.name)) return false;
-//        return birthday.equals(user.birthday);
-//    }
-
     @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + children;
-        result = 31 * result + birthday.hashCode();
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (children != user.children) return false;
+        if (!name.equals(user.name)) return false;
+        return birthday.equals(user.birthday);
     }
+
+//    @Override
+//    public int hashCode() {
+//        int result = name.hashCode();
+//        result = 31 * result + children;
+//        result = 31 * result + birthday.hashCode();
+//        return result;
+//    }
 
     public static void main(String[] args) {
         User user1 = new User("roman", 0, new GregorianCalendar(1980, 12, 21));
