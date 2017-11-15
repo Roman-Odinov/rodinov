@@ -27,7 +27,7 @@ public class Counter extends Thread {
                 if (Thread.currentThread().isInterrupted()) break;
 
                 /*         set delay            */
-                Thread.sleep(0, 200);
+//                Thread.sleep(0, 200);
 
                 if (character == 32) {
                     wordCounter++;

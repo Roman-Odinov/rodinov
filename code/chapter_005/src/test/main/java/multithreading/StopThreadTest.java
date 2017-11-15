@@ -13,7 +13,7 @@ public class StopThreadTest extends Thread {
     @Test
     public void StopThread() {
 
-        final int timeLimit = 500;  // ms
+        final int timeLimit = 35;  // ms
 
         Counter counter = new Counter();
         ThreadManager threadManager = new ThreadManager(counter, timeLimit);  // set time limit to kill 2nd thread
@@ -35,7 +35,7 @@ public class StopThreadTest extends Thread {
         System.out.println("FINISH");
 
         // 4764 - real number of space characters in the text fragment
-        assertThat(counter.wordCounter, is(not(4764)));
+        assertThat("wordCounter should NOT be 4764",counter.wordCounter, is(not(4764)));
     }
 
 
