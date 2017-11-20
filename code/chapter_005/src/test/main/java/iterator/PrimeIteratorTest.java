@@ -1,10 +1,10 @@
 package iterator;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,12 +14,12 @@ public class PrimeIteratorTest {
     private Iterator<Integer> it;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         it = new PrimeIterator(new int[]{1, 2, 3, 4, 5, 6, 7, 3571});
     }
 
-    @Test (expected = NoSuchElementException.class)
-    public void shouldReturnPrimeNumbersOnly () {
+    @Test(expected = NoSuchElementException.class)
+    public void shouldReturnPrimeNumbersOnly() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(true));
@@ -35,7 +35,7 @@ public class PrimeIteratorTest {
     }
 
     @Test
-    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder () {
+    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(2));
@@ -46,8 +46,8 @@ public class PrimeIteratorTest {
     }
 
     @Test
-    public void shouldReturnFalseCauseThereIsNoAnyPrimeNumber (){
-        it = new PrimeIterator(new int[]{4,6});
-        assertThat("should return false, because there is no any prime number",it.hasNext(), is(false));
+    public void shouldReturnFalseCauseThereIsNoAnyPrimeNumber() {
+        it = new PrimeIterator(new int[]{4, 6});
+        assertThat("should return false, because there is no any prime number", it.hasNext(), is(false));
     }
 }

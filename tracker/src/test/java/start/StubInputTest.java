@@ -4,8 +4,8 @@ import input.StubInput;
 import models.Item;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * 2. В классе StubInputTest написать JUnit тесты, использующие класс StubInput (из видео) для эмуляции поведения пользователя.
@@ -17,11 +17,11 @@ import static org.hamcrest.core.Is.is;
  * В StubInput задаём последовательность выбора {0, "name", "desc", 6}, где 0 это выбор элемента меню - добавление заявки,
  * name и desc - имя автора и описание заявки, 6 - это выход.
  * После этого проверяем, что в трекере появился новый объект Item с именем name и описанием desc.
- *
  */
 public class StubInputTest {
 
     Tracker tracker = new Tracker();
+
     @Test
     public void InputTest() throws Exception {
         /**
@@ -104,7 +104,6 @@ public class StubInputTest {
         assertThat(tracker.getAll()[0].getName(), is(testName0)); // проверяем, что элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.getAll()[1].getName(), is(testName2));
         assertThat(tracker.getAll()[2].getName(), is(testName3));
-
 
 
     } // StubInputTest

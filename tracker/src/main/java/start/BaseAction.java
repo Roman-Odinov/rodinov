@@ -15,7 +15,7 @@ public abstract class BaseAction implements UserAction {
     /**
      * Конструктор.
      *
-     * @param key - ключ, по которому активируется действие;
+     * @param key         - ключ, по которому активируется действие;
      * @param description - описание действия.
      */
     BaseAction(int key, String description) {

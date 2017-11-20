@@ -7,6 +7,7 @@ public class MenuOutException extends RuntimeException {
 
     /**
      * Throw exception named 'MenuOutException' with msg.
+     *
      * @param msg
      */
     public MenuOutException(String msg) {

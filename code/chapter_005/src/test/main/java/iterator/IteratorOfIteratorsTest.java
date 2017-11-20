@@ -1,11 +1,11 @@
 package iterator;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,7 +14,7 @@ public class IteratorOfIteratorsTest {
     Iterator<Integer> it;
 
     @Before
-    public void setUp () {
+    public void setUp() {
         Iterator<Integer> it1 = Arrays.asList(1, 2, 3).iterator();
         Iterator<Integer> it2 = Arrays.asList(4, 5, 6).iterator();
         Iterator<Integer> it3 = Arrays.asList(7, 8, 9).iterator();
@@ -24,7 +24,7 @@ public class IteratorOfIteratorsTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void hasNextNextSequentialInvocation () {
+    public void hasNextNextSequentialInvocation() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
@@ -48,7 +48,7 @@ public class IteratorOfIteratorsTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation () {
+    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
@@ -62,7 +62,7 @@ public class IteratorOfIteratorsTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder () {
+    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));

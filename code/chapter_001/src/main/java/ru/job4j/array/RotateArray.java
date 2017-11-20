@@ -10,8 +10,8 @@ public class RotateArray {
 
         int[][] array = new int[arrSize][arrSize];
 
-        for(int i = 0; i < arrSize; ++i) {
-            for(int j = 0; j < arrSize; ++j) {
+        for (int i = 0; i < arrSize; ++i) {
+            for (int j = 0; j < arrSize; ++j) {
                 array[i][j] = intArray[arrSize - j - 1][i];
             }
         }

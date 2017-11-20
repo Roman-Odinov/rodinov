@@ -2,7 +2,7 @@ package ru.job4j.loop;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PaintTest {
     @Test

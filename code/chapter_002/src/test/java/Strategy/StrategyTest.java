@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * TEST that our virtual console gets the same String as should
@@ -24,7 +24,6 @@ public class StrategyTest {
 
         new Paint(new Triangle()).draw();
         assertEquals(output.toString(), triangleShape);
-
 
 
     }

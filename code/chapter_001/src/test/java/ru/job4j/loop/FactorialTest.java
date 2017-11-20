@@ -1,7 +1,8 @@
 package ru.job4j.loop;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * В классе FactorialTest напишите 2 тест-метода, которые будет проверять вашу программу.

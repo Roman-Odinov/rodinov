@@ -1,6 +1,7 @@
 package ru.job4j.point;
 
 import java.util.Arrays;
+
 /**
  * Создать класс Triangle c тремя полями Point.
  * Класс Point использовать из предыдущего задания.
@@ -25,6 +26,7 @@ public class Triangle {
 
     /**
      * Вычисление площади.
+     *
      * @return 0 если построить треугольник невозможно; double - вычисленная площадь
      */
     public double area() {
@@ -38,12 +40,12 @@ public class Triangle {
             |AC| = sqrt( (yC - yA)² + (xC - xA)² )
             |BC| = sqrt( (yC - yB)² + (xC - xB)² )
         */
-        double ab = Math.abs( Math.sqrt( Math.pow(b.getY() - a.getY(), 2) + Math.pow(b.getX() - a.getX(), 2) ) );
-        double ac = Math.abs( Math.sqrt( Math.pow(c.getY() - a.getY(), 2) + Math.pow(c.getX() - a.getX(), 2) ) );
-        double bc = Math.abs( Math.sqrt( Math.pow(c.getY() - b.getY(), 2) + Math.pow(c.getX() - b.getX(), 2) ) );
+        double ab = Math.abs(Math.sqrt(Math.pow(b.getY() - a.getY(), 2) + Math.pow(b.getX() - a.getX(), 2)));
+        double ac = Math.abs(Math.sqrt(Math.pow(c.getY() - a.getY(), 2) + Math.pow(c.getX() - a.getX(), 2)));
+        double bc = Math.abs(Math.sqrt(Math.pow(c.getY() - b.getY(), 2) + Math.pow(c.getX() - b.getX(), 2)));
 
         // сортировка длин отрезков в порядке увеличения
-        double lineArr[] = {ab, ac, bc};
+        double[] lineArr = {ab, ac, bc};
         Arrays.sort(lineArr);
 
         if (lineArr[2] == lineArr[0] + lineArr[1]) {

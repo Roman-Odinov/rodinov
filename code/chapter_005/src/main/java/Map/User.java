@@ -1,6 +1,9 @@
 package Map;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Перекрывать и equals и hashCode.
@@ -10,7 +13,6 @@ import java.util.*;
  * Создать карту Map<User, Object>
  *
  * Добавить два объекта с пункта 3 в карту. Вывести карту на печать. Описать полученный результат словами.
- *
  */
 public class User {
 

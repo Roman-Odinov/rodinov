@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 //import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JaggedArrayIteratorTest {

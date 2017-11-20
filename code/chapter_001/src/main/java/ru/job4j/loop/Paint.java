@@ -3,7 +3,8 @@ package ru.job4j.loop;
 public class Paint {
     /**
      * Нарисовать пирамиду из символа ^ и пробелов.
-     * @param h  - это высота пирамиды;
+     *
+     * @param h - это высота пирамиды;
      * @return String.
      */
     public String pyramid(int h) {

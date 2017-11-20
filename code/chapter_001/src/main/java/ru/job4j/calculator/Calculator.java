@@ -1,8 +1,8 @@
 package ru.job4j.calculator;
 
 /**
-* class Calculator - выполнение простых арифметических действий.
-*/
+ * class Calculator - выполнение простых арифметических действий.
+ */
 public class Calculator {
 
     private double result;
@@ -11,15 +11,15 @@ public class Calculator {
         this.result = first + second;
     }
 
-	public void substract(double first, double second) {
+    public void substract(double first, double second) {
         this.result = first - second;
     }
 
-	public void div(double first, double second) {
+    public void div(double first, double second) {
         this.result = first / second;
     }
 
-	public void multiply(double first, double second) {
+    public void multiply(double first, double second) {
         this.result = first * second;
     }
 

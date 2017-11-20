@@ -6,8 +6,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
-* class CalculatorTest - тесты методов класса Calculator.
-*/
+ * class CalculatorTest - тесты методов класса Calculator.
+ */
 public class CalculatorTest {
     @Test
     public void testAdd() {
@@ -17,28 +17,31 @@ public class CalculatorTest {
         double expected = 2D;
         assertThat(result, is(expected));
     }
-	@Test
-	public void testSubstract() {
-		Calculator calc = new Calculator();
+
+    @Test
+    public void testSubstract() {
+        Calculator calc = new Calculator();
         calc.substract(10D, 8D);
         double result = calc.getResult();
         double expected = 2D;
         assertThat(result, is(expected));
-	}
-	@Test
-	public void testDiv() {
-		Calculator calc = new Calculator();
+    }
+
+    @Test
+    public void testDiv() {
+        Calculator calc = new Calculator();
         calc.div(35D, 7D);
         double result = calc.getResult();
         double expected = 5D;
         assertThat(result, is(expected));
-	}
-	@Test
-	public void testMultiply() {
-		Calculator calc = new Calculator();
+    }
+
+    @Test
+    public void testMultiply() {
+        Calculator calc = new Calculator();
         calc.multiply(10D, 8D);
         double result = calc.getResult();
         double expected = 80D;
         assertThat(result, is(expected));
-	}
+    }
 }

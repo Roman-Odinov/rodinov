@@ -1,11 +1,12 @@
 package ru.job4j.array;
 
 import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
- * Тесты для метода remove() класса ArrayDuplicate
+ * Тесты для метода remove() класса ArrayDuplicate.
  */
 public class ArrayDuplicateTest {
     @Test

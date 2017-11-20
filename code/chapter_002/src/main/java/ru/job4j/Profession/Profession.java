@@ -11,7 +11,7 @@ public class Profession {
     double gross;      // оклад
 
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
@@ -29,7 +29,6 @@ public class Profession {
          */
         System.out.print("это родительский класс");
     }
-
 
 
 }

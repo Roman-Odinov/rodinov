@@ -5,7 +5,8 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class TrackerTest {
 
@@ -39,13 +40,13 @@ public class TrackerTest {
          * .findByName()
          */
         // у нас 2 совпадающих по имени "another item" элемента: items[1], items[2]
-        Item[] itemsToCompareTo = { items[1], items[2] };   //  то, с чем будем сравнивать
+        Item[] itemsToCompareTo = {items[1], items[2]};   //  то, с чем будем сравнивать
         Item[] foundItems = tracker.findByName("another item");    // то, что получаем в методе
 
         assertThat(foundItems, is(itemsToCompareTo));
 
         // распечатаем
-        for (Item theitem : foundItems){
+        for (Item theitem : foundItems) {
             System.out.println("name: " + theitem.getName() + "; id = " + theitem.getId());
         }
         System.out.println("=============================================================");
@@ -127,7 +128,7 @@ public class TrackerTest {
          */
         // удаляем второй элемент,
         // список для сравнения состоит из первого и третьего элемента:
-        itemsToCompareTo = new Item[]{ tracker.items[0], tracker.items[2] };
+        itemsToCompareTo = new Item[]{tracker.items[0], tracker.items[2]};
 
         // удалим второй по счету элемент
         tracker.delete(tracker.items[1]);

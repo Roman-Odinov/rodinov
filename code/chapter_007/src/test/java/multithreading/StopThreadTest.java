@@ -2,7 +2,8 @@ package multithreading;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -35,7 +36,7 @@ public class StopThreadTest extends Thread {
         System.out.println("FINISH");
 
         // 4764 - real number of space characters in the text fragment
-        assertThat("wordCounter should NOT be 4764",counter.wordCounter, is(not(4764)));
+        assertThat("wordCounter should NOT be 4764", counter.wordCounter, is(not(4764)));
     }
 
 

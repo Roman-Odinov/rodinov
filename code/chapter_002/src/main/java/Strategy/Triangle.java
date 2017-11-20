@@ -6,7 +6,7 @@ package Strategy;
  */
 public class Triangle implements Shape {
     @Override
-    public String pic(){
+    public String pic() {
         StringBuilder sb = new StringBuilder();
         sb.append("  *  \n");
         sb.append(" * * \n");
