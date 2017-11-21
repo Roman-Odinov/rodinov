@@ -65,7 +65,8 @@
 				<version>3.3</version>
 				<configuration>
 					<compilerVersion>1.8</compilerVersion>
-				</configuration>
+                    <!--<outputDirectory>~/tmp/Java/classes</outputDirectory>-->
+                </configuration>
 			</plugin>
 		</plugins>
 	</build> 

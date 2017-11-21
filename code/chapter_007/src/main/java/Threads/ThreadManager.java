@@ -1,4 +1,4 @@
-package multithreading;
+package Threads;
 
 /**
  * Stops another Thread by time limit
