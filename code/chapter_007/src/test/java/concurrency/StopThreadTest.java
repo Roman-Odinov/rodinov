@@ -1,4 +1,4 @@
-package Threads;
+package concurrency;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class StopThreadTest extends Thread {
 
     @Test
-    public void StopThread() {
+    public void stopThread() {
 
         final int timeLimit = 35;  // ms
 

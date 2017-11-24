@@ -1,4 +1,4 @@
-package Threads;
+package concurrency;
 
 /**
  * Stops another Thread by time limit
@@ -13,7 +13,7 @@ public class ThreadManager extends Thread {
         this.LIMIT = limit;
     }
 
-    void TimeLimiter() throws InterruptedException {
+    void timeLimiter() throws InterruptedException {
         t.join(LIMIT);                                  // wait for LIMIT, ms
         if (t.isAlive()) t.interrupt();                 // if hasn't finished - stop it by setting flag interrupt
     }
@@ -22,7 +22,7 @@ public class ThreadManager extends Thread {
     @Override
     public void run() {
         try {
-            TimeLimiter();
+            timeLimiter();
         } catch (InterruptedException e) {
 //            e.printStackTrace();
         }

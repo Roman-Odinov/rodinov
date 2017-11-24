@@ -1,12 +1,12 @@
-package JMMTroubles;
+package jmmtroubles;
 
 class MyRunnable1 implements Runnable {
 
-    private static final int limit = 15;
+    private static final int LIMIT = 15;
     private String threadName;
     private final boolean direction;
 
-    public MyRunnable1(boolean direction) {
+    MyRunnable1(boolean direction) {
         this.direction = direction;
     }
 
@@ -37,7 +37,7 @@ class MyRunnable1 implements Runnable {
             counter++;
             System.out.printf("%s: %s%n", threadName, localVariable1);
 
-        } while (counter < limit);
+        } while (counter < LIMIT);
         System.out.println("================================================================");
 
     }

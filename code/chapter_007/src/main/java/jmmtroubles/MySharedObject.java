@@ -1,9 +1,9 @@
-package JMMTroubles;
+package jmmtroubles;
 
 public class MySharedObject {
 
     //STATIC variable pointing to instance of MySharedObject
-    public static final MySharedObject sharedInstance =
+    public static final MySharedObject SHARED_INSTANCE =
             new MySharedObject();
 
     //member variables pointing to two objects on the heap

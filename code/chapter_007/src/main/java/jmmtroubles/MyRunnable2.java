@@ -1,8 +1,8 @@
-package JMMTroubles;
+package jmmtroubles;
 
 class MyRunnable2 implements Runnable {
 
-    private static final int mustBe = 5;
+    private static final int MUST_BE = 5;
     private String threadName;
 
     public void run() {
@@ -22,14 +22,14 @@ class MyRunnable2 implements Runnable {
          *
          * The MySharedObject instance is also stored on the HEAP. It corresponds to Object 3 in the diagram above.
          */
-        MySharedObject localVariable2 = MySharedObject.sharedInstance; // object reference -- > HEAP
+        MySharedObject localVariable2 = MySharedObject.SHARED_INSTANCE; // object reference -- > HEAP
         // --> доступна для изменения всеми потоками
 
 //        System.out.printf("%s:%n", methodName);
 
         System.out.printf("%s: начальное значение %s%n", threadName, localVariable2.member1);
         System.out.printf("%s: собираемся поменять значение, проверка... %n", threadName);
-        if (localVariable2.member1 == mustBe) {
+        if (localVariable2.member1 == MUST_BE) {
             localVariable2.member1 += 1;
             System.out.printf("%s: всё в порядке, меняем...%n", threadName);
             System.out.printf("%s: changed %s%n", threadName, localVariable2.member1);

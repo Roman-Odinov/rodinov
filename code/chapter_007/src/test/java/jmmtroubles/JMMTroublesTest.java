@@ -1,4 +1,4 @@
-package JMMTroubles;
+package jmmtroubles;
 
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class JMMTroublesTest {
      * Each thread has ITS OWN INSTANCE of primitive (int).
      */
     @Test
-    public void ThreadStackPrimitivesTest() throws InterruptedException {
+    public void threadStackPrimitivesTest() throws InterruptedException {
 
         System.out.println("----------- THREAD STACK. primitive (int)");
         Thread t1 = new Thread(new MyRunnable1(true), "Thread #1");
@@ -33,7 +33,7 @@ public class JMMTroublesTest {
      * Each thread has ITS OWN INSTANCE of object(Integer).
      */
     @Test
-    public void HeapSepareateObjectInstanceTest() throws InterruptedException {
+    public void heapSepareateObjectInstanceTest() throws InterruptedException {
 
         System.out.println("----------- HEAP. Separated instances of object(Integer)");
         Thread t1 = new Thread(new MyRunnable3(true), "Thread #1");
@@ -51,7 +51,7 @@ public class JMMTroublesTest {
      * Static object, shared with 2 threads.
      */
     @Test
-    public void RaceConditionTest() throws InterruptedException {
+    public void raceConditionTest() throws InterruptedException {
 
         System.out.println("----------- Static object, shared with 2 threads.");
         Thread t1 = new Thread(new MyRunnable2(), "Thread #1");
