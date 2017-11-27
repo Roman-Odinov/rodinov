@@ -15,6 +15,7 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 class Count {
 
+    @GuardedBy("this")
     int value = 0;
 
     /**
@@ -25,7 +26,6 @@ class Count {
      * The other thread will wait until the first thread leaves the increment() method,
      * before it can execute the method itself.
      */
-    @GuardedBy("this")
     public synchronized int increment() {
         for(int i=1; i<10; i++) {
             this.value += i;
