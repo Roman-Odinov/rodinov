@@ -27,7 +27,7 @@ class Count {
      * before it can execute the method itself.
      */
     public synchronized int increment() {
-        for(int i=1; i<10; i++) {
+        for (int i = 1; i < 10; i++) {
             this.value += i;
         }
         return this.value;
