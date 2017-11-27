@@ -6,15 +6,15 @@ package concurrency;
 public class ThreadManager extends Thread {
 
     private final Thread t;
-    private final int LIMIT;
+    private final int limit;
 
     public ThreadManager(Thread t, int limit) {
         this.t = t;
-        this.LIMIT = limit;
+        this.limit = limit;
     }
 
     void timeLimiter() throws InterruptedException {
-        t.join(LIMIT);                                  // wait for LIMIT, ms
+        t.join(limit);                                  // wait for limit, ms
         if (t.isAlive()) t.interrupt();                 // if hasn't finished - stop it by setting flag interrupt
     }
 
