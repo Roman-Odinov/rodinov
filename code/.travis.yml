@@ -14,4 +14,4 @@ notifications:
     recipients:
       - roman.odinov@yandex.ru
     on_success: never # default: change
-    on_failure: always # default: always
+    on_failure: never # default: always
