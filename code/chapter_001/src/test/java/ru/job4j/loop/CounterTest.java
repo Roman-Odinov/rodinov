@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CounterTest {
     @Test
-    public void Add() throws Exception {
+    public void add() throws Exception {
         int expectedValue = 30;
         Counter counter = new Counter();
         int actualValue = counter.add(-6, 12);

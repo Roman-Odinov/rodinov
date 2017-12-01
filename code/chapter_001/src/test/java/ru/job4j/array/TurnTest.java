@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
  */
 public class TurnTest {
     @Test
-    public void TurnTestComplete() {
+    public void turnTestComplete() {
         // для четного количества элементов
         int[] intArray = {1, 2, 4, 6, 8, 10, 11, 12};
         int[] resultArray = new Turn().back(intArray);
