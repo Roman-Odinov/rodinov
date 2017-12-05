@@ -63,51 +63,60 @@ public class UserStorage /*extends Thread */ {
          * false if user exists
          */
         boolean addUser(User user) {
-            log("ADD\n" + "add position: " + user.getid());
+            synchronized (userMonitor) {
 
-            // Map.put() returns previous value, or null if none
-            return users.put(user.getid(), user) == null;
+                log("ADD\n" + "add position: " + user.getid());
+
+                // Map.put() returns previous value, or null if none
+                return users.put(user.getid(), user) == null;
+            }
         }
 
 
         boolean update(int id, User user) {
-            log("UPDATE\nupdate position: " + id + " amount: " + user.getAmount());
-            boolean result = false;
-            if (users.containsKey(id)) {
-                users.put(id, user);
-                result = true;
+            synchronized (userMonitor) {
+                log("UPDATE\nupdate position: " + id + " amount: " + user.getAmount());
+                boolean result = false;
+                if (users.containsKey(id)) {
+                    users.put(id, user);
+                    result = true;
+                }
+                return result;
             }
-            return result;
         }
 
 
         boolean delete(int id) {
-            log("DELETE\ndelete position: " + id);
-            boolean result = false;
-            if (users.containsKey(id)) {
-                users.remove(id);
-                result = true;
+            synchronized (userMonitor) {
+                log("DELETE\ndelete position: " + id);
+                boolean result = false;
+                if (users.containsKey(id)) {
+                    users.remove(id);
+                    result = true;
+                }
+                return result;
             }
-            return result;
         }
 
 
         boolean transfer(int fromId, int toId, float amount) {
-            log("TRANSFER\n" +
-                    "fromIndex: " + fromId + "\n" +
-                    "toIndex: " + toId);
+            synchronized (userMonitor) {
+                log("TRANSFER\n" +
+                        "fromIndex: " + fromId + "\n" +
+                        "toIndex: " + toId);
 
-            boolean result = false;
+                boolean result = false;
 
-            if (users.containsKey(fromId) &&
-                    users.containsKey(toId)) {
-                if (users.get(fromId).getAmount() >= amount) {
-                    users.get(fromId).setAmount(users.get(fromId).getAmount() - amount);
-                    users.get(toId).setAmount(users.get(toId).getAmount() + amount);
-                    result = true;
+                if (users.containsKey(fromId) &&
+                        users.containsKey(toId)) {
+                    if (users.get(fromId).getAmount() >= amount) {
+                        users.get(fromId).setAmount(users.get(fromId).getAmount() - amount);
+                        users.get(toId).setAmount(users.get(toId).getAmount() + amount);
+                        result = true;
+                    }
                 }
+                return result;
             }
-            return result;
         }
 
 
