@@ -1,8 +1,10 @@
 package synchronize;
 
+import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1. Создать класс - структуру данных для хранение пользователей UserStorage.
@@ -24,30 +26,18 @@ import java.util.HashMap;
  * stoge.transfer(1, 2, 50);
  */
 @ThreadSafe
-public class UserStorage /*extends Thread */ {
+public class UserStorage {
 
     private final Object userMonitor = new Object();
 
-    private HashMap<Integer, User> users = new HashMap<>();
-//    private HashMap<Integer, User> users;
+    private Map<Integer, User> users = new HashMap<>();
 
-
-//    /**
-//     * create user`s storage
-//     */
-//    public void createStorage(){
-//        this.users = new HashMap<>();
-//    }
-
-//    public void createUserMonitor(){
-//        this.userMonitor = new Object();
-//    }
 
     private void log(String s) {
         System.out.println(s);
     }
 
-    public HashMap<Integer, User> getUsers() {
+    public Map<Integer, User> getUsers() {
         return this.users;
     }
 
@@ -62,6 +52,7 @@ public class UserStorage /*extends Thread */ {
          * @return true if there was no mapping for user, or
          * false if user exists
          */
+        @GuardedBy("userMonitor")
         boolean addUser(User user) {
             synchronized (userMonitor) {
 
@@ -72,7 +63,7 @@ public class UserStorage /*extends Thread */ {
             }
         }
 
-
+        @GuardedBy("userMonitor")
         boolean update(int id, User user) {
             synchronized (userMonitor) {
                 log("UPDATE\nupdate position: " + id + " amount: " + user.getAmount());
@@ -85,7 +76,7 @@ public class UserStorage /*extends Thread */ {
             }
         }
 
-
+        @GuardedBy("userMonitor")
         boolean delete(int id) {
             synchronized (userMonitor) {
                 log("DELETE\ndelete position: " + id);
@@ -98,7 +89,7 @@ public class UserStorage /*extends Thread */ {
             }
         }
 
-
+        @GuardedBy("userMonitor")
         boolean transfer(int fromId, int toId, float amount) {
             synchronized (userMonitor) {
                 log("TRANSFER\n" +

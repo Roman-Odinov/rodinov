@@ -22,11 +22,6 @@ public class UserStorageTest {
     UserStorage storage = new UserStorage();
     UserStorage.UserStorageManager manager = storage.new UserStorageManager();
 
-//}
-//public void initStorage(){
-//    this.storage.createStorage();
-//    this.storage.createUserMonitor();
-//}
 
     private void printAllUsers(String s) {
         System.out.println(s);
@@ -39,7 +34,6 @@ public class UserStorageTest {
     @Test
     public void whenAddAndThenUpdateShouldReturnLastChangedAmount() throws Exception {
 
-//        this.initStorage();
 
         System.out.println("--------------------------------------------------");
 
@@ -61,14 +55,13 @@ public class UserStorageTest {
         t3.join();
 
         printAllUsers("after update-");
-        assertThat(this.storage.getUsers().get(0).getAmount(), is(589.00f));    //fixme but: was <456.33F>
+        assertThat(this.storage.getUsers().get(0).getAmount(), is(589.00f));
 
     }
 
     @Test
     public void whenSendMoneyShouldIncreaseAndDecrease() throws InterruptedException {
 
-//        this.initStorage();
 
         System.out.println("--------------------------------------------------");
 
@@ -81,7 +74,7 @@ public class UserStorageTest {
         t1.join();
         t2.join();
 
-        printAllUsers("after add users:");  // fixme (1) prints only "User: 3 Amount: 0.89" OR (2) User: 2 Amount: 1000.89
+        printAllUsers("after add users:");
 
         Thread t3 = new Thread(() -> manager.transfer(2, 3, 154.27f));
 
@@ -93,11 +86,9 @@ public class UserStorageTest {
         t3.join();
         t4.join();
 
-        printAllUsers("after send money two times");    // fixme (1) User: 3 Amount: 0.89 OR (2) User: 2 Amount: 1000.89
-        // fixme (3) User: 2 Amount: 846.62  User: 3 Amount: 155.16
+        printAllUsers("after send money two times");
 
-        assertThat(this.storage.getUsers().get(2).getAmount(), is(692.35f)); // fixme (1) NullPointerException  (2)  but: was <1000.89F>
-        // fixme (3) was <846.62F>
+        assertThat(this.storage.getUsers().get(2).getAmount(), is(692.35f));
         assertThat(this.storage.getUsers().get(3).getAmount(), is(309.43f));
     }
 
