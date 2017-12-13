@@ -37,8 +37,11 @@ public class UserStorage {
         System.out.println(s);
     }
 
+    @GuardedBy("userMonitor")
     public Map<Integer, User> getUsers() {
-        return this.users;
+        synchronized (userMonitor) {
+            return this.users;
+        }
     }
 
 
